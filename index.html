@@ -282,9 +282,8 @@
 </style>
 
 <style>
-.framer-b5gnf5 h2 { visibility: hidden !important; position: relative; }
-.framer-b5gnf5 h2::after { content: "El principio de una historia que no tiene fin."; visibility: visible; position: absolute; left: 0; top: 0; background: white; width: 100%; padding-bottom: 20px; z-index: 999; }
-
+/* Heading replacement via JS only - no CSS trick needed */
+.framer-b5gnf5 h2 { visibility: visible !important; }
 </style>
 
 <style>
@@ -1311,13 +1310,23 @@
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() {
-    document.querySelectorAll('.framer-b5gnf5 h2').forEach(function(el) {
+function fixHeading() {
+  document.querySelectorAll('.framer-b5gnf5 h2').forEach(function(el) {
+    if (el.textContent.trim() !== 'El principio de una historia que no tiene fin.') {
       el.textContent = 'El principio de una historia que no tiene fin.';
-    });
-  }, 500);
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  fixHeading();
+  setTimeout(fixHeading, 300);
+  setTimeout(fixHeading, 800);
+  setTimeout(fixHeading, 1500);
 }, false);
+window.addEventListener('load', function() {
+  fixHeading();
+  setTimeout(fixHeading, 500);
+});
 </script>
 
 
