@@ -1294,6 +1294,12 @@
 
 
 
+
+
+
+
+
+
 <script>
 (function() {
   function replaceText(element) {
@@ -1436,37 +1442,94 @@
           element.nodeValue = element.nodeValue.replace(/About\s+analisis\s+de\s+datos/gi, '+ info');
         }
         
-        // Reemplazo de Proyecto Azure -> Playa Padre
+        // Reemplazo de los botones "Discover" -> "+ info"
+        if (element.nodeValue.trim() === "Discover") {
+          element.nodeValue = "+ info";
+        }
+        if (element.nodeValue.trim() === "DISCOVER") {
+          element.nodeValue = "+ info";
+        }
+        if (/Discover/i.test(element.nodeValue)) {
+          element.nodeValue = element.nodeValue.replace(/Discover/gi, '+ info');
+        }
+        if (/DISCOVER/i.test(element.nodeValue)) {
+          element.nodeValue = element.nodeValue.replace(/DISCOVER/gi, '+ info');
+        }
+        
+        // Reemplazo seguro de Azure -> Playa Padre (Solo dinámico para evitar romper la hidratación de React)
         if (element.nodeValue.trim() === "Azure") {
           element.nodeValue = "Playa Padre";
         }
         if (element.nodeValue.trim() === "AZURE") {
           element.nodeValue = "PLAYA PADRE";
         }
-        if (/Azure/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/Azure/gi, 'Playa Padre');
-        }
-        if (/AZURE/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/AZURE/gi, 'PLAYA PADRE');
+        
+        // Reemplazo de la descripción de Playa Padre (Azure)
+        if (/Website\s+Redesign:\s+Improving\s+user\s+experience/i.test(element.nodeValue)) {
+          element.nodeValue = "Acciones: Rediseño web, redaccion de contenido, Posicionamiento SEO y análisis de datos";
         }
         
-        // Reemplazo de Proyecto Sage -> Frou Frou
+        // Reemplazo de los metadatos específicos de la página del proyecto Playa Padre (azure.html)
+        // Solo realizamos los reemplazos si estamos en azure.html para no afectar de forma global a otros textos
+        if (window.location.pathname.indexOf('azure.html') !== -1 || window.location.pathname.indexOf('azure') !== -1 || window.location.pathname.indexOf('playa') !== -1) {
+          if (element.nodeValue.trim() === "Client") {
+            element.nodeValue = "Cliente";
+          }
+          // Evitamos cambiar el título de la página "Playa Padre" a "Grupo Mosh"
+          // Para ello, comprobamos que el nodo de texto no pertenezca a un tag de cabecera como H1 o similar,
+          // o que no tenga un parent con ciertas clases prominentes.
+          // Comprobamos si el parent es un tag H1
+          if (element.nodeValue.trim() === "Playa Padre") {
+            var isHeading = false;
+            var parent = element.parentNode;
+            while (parent) {
+              if (parent.tagName === 'H1' || parent.tagName === 'H2' || parent.tagName === 'H3') {
+                isHeading = true;
+                break;
+              }
+              parent = parent.parentNode;
+            }
+            if (!isHeading) {
+              element.nodeValue = "Grupo Mosh";
+            }
+          }
+          if (element.nodeValue.trim() === "Services") {
+            element.nodeValue = "Servicios";
+          }
+          if (element.nodeValue.trim() === "Timeline") {
+            element.nodeValue = "Desarrollo";
+          }
+          if (element.nodeValue.trim() === "8 Weeks") {
+            element.nodeValue = "2 meses";
+          }
+          if (element.nodeValue.trim() === "gola.supply") {
+            element.nodeValue = "playapadre.com";
+          }
+          // Cambiar el enlace href de gola.supply a playapadre.com
+          if (element.parentNode && element.parentNode.tagName === 'A' && element.parentNode.getAttribute('href') === 'https://gola.supply/') {
+            element.parentNode.setAttribute('href', 'https://playapadre.com/');
+          }
+          // Para cambiar los servicios agrupados en la lista de servicios del proyecto
+          if (element.nodeValue.trim() === "Diseño web" || element.nodeValue.trim() === "DISEÑO WEB" || element.nodeValue.trim() === "diseño web") {
+            element.nodeValue = "DISEÑO WEB; ANALISIS DE DATOS Y SEO";
+          }
+          if (element.nodeValue.trim() === "Análisis de datos" || element.nodeValue.trim() === "ANALISIS DE DATOS" || element.nodeValue.trim() === "ANÁLISIS DE DATOS" || element.nodeValue.trim() === "analisis de datos") {
+            element.nodeValue = ""; // Ocultamos el nodo repetido
+          }
+        }
+        
+        // Reemplazo seguro de Sage -> Frou Frou (Solo dinámico para evitar romper la hidratación de React)
         if (element.nodeValue.trim() === "Sage") {
           element.nodeValue = "Frou Frou";
         }
         if (element.nodeValue.trim() === "SAGE") {
           element.nodeValue = "FROU FROU";
         }
-        if (/Sage/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/Sage/gi, 'Frou Frou');
-        }
-        if (/SAGE/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/SAGE/gi, 'FROU FROU');
-        }
         
-        // Reemplazo de la descripción de Playa Padre (Azure)
-        if (/Website\s+Redesign:\s+Improving\s+user\s+experience/i.test(element.nodeValue) || /Rediseño\s+de\s+web\s+y\s+posicionamiento/i.test(element.nodeValue) || /Acciones\s*:\s*Rediseño/i.test(element.nodeValue)) {
-          element.nodeValue = "Acciones: Rediseño web, generación de contenido, posicionamiento SEO y análisis de datos";
+        // Reemplazo de la descripción de Frou Frou (Sage)
+        // En el HTML original está traducido como "analisis de datos Campaign: Building brand awareness and engagement." o similar. Usamos regex para interceptarlo de forma robusta.
+        if (/(analisis\s+de\s+datos|Social\s+Media|Campaign)\s*Campaign:\s*Building\s*brand\s*awareness/i.test(element.nodeValue) || /Building\s*brand\s*awareness\s*and\s*engagement/i.test(element.nodeValue)) {
+          element.nodeValue = "Acciones: Diseño de landing pages, campañas de búsqueda y análisis de datos";
         }
       }
     } else {
