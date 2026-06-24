@@ -557,6 +557,7 @@
 
 
 
+
 <script>
 (function() {
   function replaceText(element) {
@@ -643,6 +644,16 @@
         // Reemplazo de From Berlin
         if (/From\s+Berlin/i.test(element.nodeValue)) {
           element.nodeValue = element.nodeValue.replace(/From\s+Berlin/gi, 'MÁLAGA');
+        }
+        // Reemplazo de "What we do" -> "¿Qué Hacemos?"
+        if (element.nodeValue.trim() === "What we do") {
+          element.nodeValue = "¿Qué Hacemos?";
+        }
+        if (element.nodeValue.trim() === "WHAT WE DO") {
+          element.nodeValue = "¿QUÉ HACEMOS?";
+        }
+        if (/What\s+we\s+do/i.test(element.nodeValue)) {
+          element.nodeValue = element.nodeValue.replace(/What\s+we\s+do/gi, '¿Qué Hacemos?');
         }
         // Reemplazo de 01: Branding -> marketing digital
         if (/Branding/i.test(element.nodeValue)) {
