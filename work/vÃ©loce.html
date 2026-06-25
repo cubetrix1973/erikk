@@ -571,6 +571,7 @@
 
 
 
+
 <script>
 (function() {
   function replaceText(element) {
@@ -654,6 +655,10 @@
           } else {
             element.nodeValue = 'U_NDERS';
           }
+        }
+        // Reemplazo de Erikk en cargador
+        if (/Erikk/i.test(element.nodeValue)) {
+          element.nodeValue = element.nodeValue.replace(/Erikk®?/gi, 'U_NDERS');
         }
         // Reemplazo de Branding Agency
         if (/Branding\s+Agency/i.test(element.nodeValue)) {
