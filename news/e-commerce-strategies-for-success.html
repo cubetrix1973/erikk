@@ -1318,9 +1318,44 @@
 
 
 
+
 <script>
 (function() {
   function replaceText(element) {
+    if (element.nodeType === 1) {
+      // Reemplazo de menús "Rolling Text" de Framer
+      var isRollingText = false;
+      for (var k = 0; k < element.classList.length; k++) {
+        if (element.classList[k].indexOf('rolling-text-inner') !== -1) {
+          isRollingText = true;
+          break;
+        }
+      }
+      if (isRollingText) {
+        var textContent = element.textContent.trim();
+        var translation = null;
+        if (textContent.toLowerCase() === 'about') {
+          translation = 'nosotros';
+        } else if (textContent.toLowerCase() === 'services') {
+          translation = 'servicios';
+        } else if (textContent.toLowerCase() === 'news') {
+          translation = 'blog';
+        }
+        
+        if (translation) {
+          // Reconstruir los spans de letras del rolling text para la nueva traducción
+          var html = '';
+          for (var idx = 0; idx < translation.length; idx++) {
+            var letter = translation[idx];
+            if (letter === ' ') letter = '&nbsp;';
+            html += '<span style="display:block;font-family:&quot;Roboto Mono&quot;, monospace;font-size:13px;font-style:normal;font-weight:400;letter-spacing:0.5px;line-height:13px;transform:none">' + letter + '</span>';
+          }
+          element.innerHTML = html;
+          return;
+        }
+      }
+    }
+
     if (element.nodeType === 3) {
       if (element.nodeValue) {
         // Reemplazo de la descripción larga en inglés
