@@ -308,11 +308,27 @@
 <style>.framer-4kanm7 { top: 60% !important; } .framer-n4vz6i-container, #template-overlay, #__framer-badge-container, .__framer-badge, .framer-175f1zg-container { display: none !important; } .framer-bblil4, .framer-bblil4 foreignObject, .framer-bblil4 svg { overflow: visible !important; } .unders-lift { display: inline-block !important; transform: translateY(-35px) !important; } .framer-131whd9 { display: flex !important; } .framer-jlnza5-container { order: 1 !important; } .framer-14yq27-container { order: 2 !important; } .framer-1t5plof-container { order: 3 !important; } .framer-1ob0dnm-container { order: 4 !important; }</style>
 <style>.framer-4kanm7 { top: 60% !important; } .framer-n4vz6i-container, #template-overlay, #__framer-badge-container, .__framer-badge, .framer-175f1zg-container { display: none !important; } .framer-bblil4, .framer-bblil4 foreignObject, .framer-bblil4 svg, .framer-10mngps, .framer-10mngps foreignObject, .framer-10mngps svg { overflow: visible !important; } .unders-lift { display: inline-block !important; transform: translateY(-35px) !important; } .framer-10mngps h1 { font-size: 110px !important; } .framer-131whd9 { display: flex !important; } .framer-jlnza5-container { order: 1 !important; } .framer-14yq27-container { order: 2 !important; } .framer-1t5plof-container { order: 3 !important; } .framer-1ob0dnm-container { order: 4 !important; }</style>
 <style>.framer-4kanm7 { top: 60% !important; } .framer-n4vz6i-container, #template-overlay, #__framer-badge-container, .__framer-badge, .framer-175f1zg-container { display: none !important; } .framer-bblil4, .framer-bblil4 foreignObject, .framer-bblil4 svg, .framer-10mngps, .framer-10mngps foreignObject, .framer-10mngps svg { overflow: visible !important; } .unders-lift { display: inline-block !important; transform: translateY(-25px) !important; } .framer-10mngps h1 { font-size: 95px !important; --framer-font-size: 95px !important; } .framer-131whd9 { display: flex !important; } .framer-jlnza5-container { order: 1 !important; } .framer-14yq27-container { order: 2 !important; } .framer-1t5plof-container { order: 3 !important; } .framer-1ob0dnm-container { order: 4 !important; }</style>
+
 <style>
-@media (max-width: 1279.98px) {
-  header .framer-jwc929, header .framer-rcc1qw, header .framer-anttwh {
+@media (max-width: 809px) {
+  .framer-v-s88g1n .framer-4ZWoU [class*="rolling-text-inner"] span {
     display: none !important;
   }
+  .framer-v-s88g1n .framer-4ZWoU [class*="rolling-text-inner"]::after {
+    content: "U_NDERS" !important;
+    display: inline-block !important;
+    font-family: "Roboto Mono", monospace !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;
+    line-height: 13px !important;
+    color: var(--text-color, inherit) !important;
+  }
+}
+</style>
+<style>
+@media (max-width: 809px) {
+  .unders-lift { display: inline-block !important; transform: translateY(-15px) !important; }
 }
 </style>
 </head>
@@ -1469,16 +1485,23 @@ window.addEventListener('load', function() {
           element.nodeValue = "Proyectos";
         }
         if (element.nodeValue.trim() === "Work") {
-          var isNav = false;
-          var temp = element.parentNode;
-          while (temp && temp.tagName !== 'BODY') {
-            if (temp.tagName === 'HEADER' || temp.tagName === 'NAV') {
-              isNav = true;
+          var parentLink = element.parentNode;
+          while (parentLink && parentLink.tagName !== 'BODY') {
+            if (parentLink.tagName === 'A') {
               break;
             }
-            temp = temp.parentNode;
+            parentLink = parentLink.parentNode;
           }
-          if (!isNav) {
+          var isWorkLink = false;
+          if (parentLink && parentLink.tagName === 'A') {
+            var href = parentLink.getAttribute('href') || '';
+            if (href.indexOf('work') !== -1) {
+              isWorkLink = true;
+            }
+          }
+          if (isWorkLink) {
+            element.nodeValue = "proyectos";
+          } else {
             element.nodeValue = "";
           }
         }
@@ -1486,16 +1509,23 @@ window.addEventListener('load', function() {
           element.nodeValue = "PROYECTOS";
         }
         if (element.nodeValue.trim() === "WORK") {
-          var isNav = false;
-          var temp = element.parentNode;
-          while (temp && temp.tagName !== 'BODY') {
-            if (temp.tagName === 'HEADER' || temp.tagName === 'NAV') {
-              isNav = true;
+          var parentLink = element.parentNode;
+          while (parentLink && parentLink.tagName !== 'BODY') {
+            if (parentLink.tagName === 'A') {
               break;
             }
-            temp = temp.parentNode;
+            parentLink = parentLink.parentNode;
           }
-          if (!isNav) {
+          var isWorkLink = false;
+          if (parentLink && parentLink.tagName === 'A') {
+            var href = parentLink.getAttribute('href') || '';
+            if (href.indexOf('work') !== -1) {
+              isWorkLink = true;
+            }
+          }
+          if (isWorkLink) {
+            element.nodeValue = "PROYECTOS";
+          } else {
             element.nodeValue = "";
           }
         }
@@ -1745,7 +1775,7 @@ window.addEventListener('load', function() {
 <script>
 (function() {
   function fixMobileMenu() {
-    if (window.innerWidth >= 1280) {
+    if (window.innerWidth >= 810) {
       return;
     }
 
@@ -1801,9 +1831,6 @@ window.addEventListener('load', function() {
     }
 
     if (menuContainer) {
-      menuContainer.style.setProperty('display', 'flex', 'important');
-      menuContainer.style.setProperty('flex-direction', 'column', 'important');
-
       for (var c = 0; c < menuContainer.children.length; c++) {
         var child = menuContainer.children[c];
         var text = (child.textContent || '').toUpperCase().trim();
@@ -1819,30 +1846,20 @@ window.addEventListener('load', function() {
         var isNews = (text.indexOf('NEWS') !== -1 || text.indexOf('BLOG') !== -1 || href.indexOf('news') !== -1);
 
         if (isAbout) {
-          ensureLinkText(link, 'Nosotros');
           child.style.setProperty('order', '1', 'important');
-          child.style.setProperty('display', 'block', 'important');
         } else if (isServices) {
-          ensureLinkText(link, 'Servicios');
           child.style.setProperty('order', '2', 'important');
-          child.style.setProperty('display', 'block', 'important');
         } else if (isWork) {
-          ensureLinkText(link, 'Proyectos');
-          link.setAttribute('href', 'work.html');
           child.style.setProperty('order', '3', 'important');
-          child.style.setProperty('display', 'block', 'important');
         } else if (isNews) {
-          ensureLinkText(link, 'Blog');
-          link.setAttribute('href', 'news.html');
           child.style.setProperty('order', '4', 'important');
-          child.style.setProperty('display', 'block', 'important');
         } else {
           // Hide everything else (Home, Utility Pages, CMS, etc.)
           child.style.setProperty('display', 'none', 'important');
         }
       }
 
-      // Hide the contact button (Hablemos) in the dropdown if menu is open
+      // Hide the contact/hablemos button in the dropdown if menu is open
       if (header) {
         var contactLinks = header.querySelectorAll('a[href*="contact"]');
         contactLinks.forEach(function(link) {
@@ -1853,29 +1870,6 @@ window.addEventListener('load', function() {
         });
       }
     }
-  }
-
-  function ensureLinkText(linkEl, text) {
-    var rollingText = linkEl.querySelector('[class*="rolling-text-inner"]');
-    if (!rollingText) {
-      if (linkEl.className && typeof linkEl.className === 'string' && linkEl.className.indexOf('rolling-text-inner') !== -1) {
-        rollingText = linkEl;
-      } else {
-        linkEl.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;overflow:hidden;padding:0px;box-sizing:border-box"><p class="rolling-text-inner-custom"></p></div>';
-        rollingText = linkEl.querySelector('.rolling-text-inner-custom');
-      }
-    }
-    
-    if (rollingText.dataset.translated === text) return;
-    
-    var html = '';
-    for (var idx = 0; idx < text.length; idx++) {
-      var letter = text[idx];
-      if (letter === ' ') letter = '&nbsp;';
-      html += '<span style="display:block;font-family:&quot;Roboto Mono&quot;, monospace;font-size:13px;font-style:normal;font-weight:400;letter-spacing:0.5px;line-height:13px;transform:none">' + letter + '</span>';
-    }
-    rollingText.innerHTML = html;
-    rollingText.dataset.translated = text;
   }
 
   setInterval(fixMobileMenu, 50);
