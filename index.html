@@ -337,23 +337,37 @@
 .framer-4ZWoU .framer-mgrps-container span {
   display: none !important;
 }
-/* Mostrar texto U_NDERS en su lugar */
+/* Mostrar logo U_NDERS como imagen SVG */
 .framer-4ZWoU .framer-mgrps-container {
   position: relative !important;
   overflow: visible !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
 }
-.framer-4ZWoU .framer-mgrps-container::before {
-  content: "U_NDERS" !important;
-  display: inline-block !important;
-  color: #000000 !important;
-  font-family: "General Sans", sans-serif !important;
-  font-size: 20px !important;
-  font-weight: 500 !important;
-  text-transform: none !important;
-  text-decoration: none !important;
+.framer-4ZWoU .framer-mgrps-container::after {
+  content: "" !important;
+  display: block !important;
+  width: 80px !important;
+  height: 45px !important;
+  background-image: url("logo-unders.svg") !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  background-position: center !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  filter: invert(1) !important; /* Blanco por defecto en fondos oscuros */
+}
+/* Versión navbar móvil cerrado (fondo claro - logo negro sin invert) */
+.framer-v-s88g1n .framer-4ZWoU .framer-mgrps-container::after,
+.framer-v-1753js3 .framer-4ZWoU .framer-mgrps-container::after,
+.framer-v-pf0wf4 .framer-4ZWoU .framer-mgrps-container::after,
+.framer-v-1uwjh3r .framer-4ZWoU .framer-mgrps-container::after {
+  filter: none !important;
+}
+/* Versión navbar móvil abierto / menú desplegado (fondo oscuro - logo blanco con invert) */
+.framer-v-de5vew .framer-4ZWoU .framer-mgrps-container::after,
+.framer-v-11x7t01 .framer-4ZWoU .framer-mgrps-container::after {
+  filter: invert(1) !important;
 }
 </style></head>
 <body>
