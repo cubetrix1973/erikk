@@ -7261,76 +7261,64 @@
 (function() {
   'use strict';
 
-  var HERO_TEXT = 'EL PRINCIPIO DE UNA HISTORIA QUE NO TIENE FIN';
-  var LOGO_SRC  = 'logo-unders.svg';
+  var HERO_TEXT   = 'EL PRINCIPIO DE UNA HISTORIA QUE NO TIENE FIN';
+  var LOGO_SRC    = 'logo-unders.svg';
+  var THEME_ATTR  = 'framestack-theme';   // Framer's theme attribute
 
+  // ── Forzar modo claro al inicio (antes de que Framer lea el atributo) ─
+  // Framer lee body[framestack-theme] en su init; si no existe usa prefers-color-scheme
+  // Lo ponemos a "light" YA para que el toggle parta de modo claro
+  document.body.setAttribute(THEME_ATTR, 'light');
+  document.documentElement.setAttribute(THEME_ATTR, 'light');
+
+  // ── Núcleo: aplicar overrides de contenido ────────────────────────────
   function applyOverrides() {
     var changed = false;
 
-    // ── 1) LOGO ──────────────────────────────────────────────────────────
+    // 1) LOGO
     var logo = document.querySelector('.framer-4ZWoU');
     if (logo) {
-      // Caso A: Framer renderiza un <img>
-      var img = logo.querySelector('img');
-      if (img) {
-        if (!img.src.includes('logo-unders')) {
-          img.src = LOGO_SRC;
-          img.style.setProperty('width',  '55px', 'important');
-          img.style.setProperty('height', 'auto', 'important');
-          changed = true;
-        }
-      } else {
-        // Caso B: Framer renderiza texto (ERIKK®)
-        if (!logo.querySelector('img.ag-logo')) {
-          // Ocultar texto
-          Array.from(logo.childNodes).forEach(function(n) {
-            if (n.nodeType === Node.TEXT_NODE || n.tagName === 'SPAN') {
-              n.style && n.style.setProperty('display', 'none', 'important');
-            }
-          });
-          logo.style.setProperty('font-size', '0', 'important');
-          logo.style.setProperty('color', 'transparent', 'important');
-          var imgEl = document.createElement('img');
-          imgEl.src = LOGO_SRC;
-          imgEl.className = 'ag-logo';
-          imgEl.style.cssText = 'width:55px;height:auto;display:block;';
-          logo.prepend(imgEl);
-          changed = true;
-        }
+      var img = logo.querySelector('img.ag-logo');
+      if (!img) {
+        // Ocultar cualquier texto/span interno
+        logo.style.setProperty('font-size', '0', 'important');
+        logo.style.setProperty('color', 'transparent', 'important');
+        var imgEl = document.createElement('img');
+        imgEl.src = LOGO_SRC;
+        imgEl.className = 'ag-logo';
+        imgEl.style.cssText = 'width:55px;height:auto;display:block;';
+        logo.prepend(imgEl);
+        changed = true;
       }
     }
 
-    // ── 2) HERO HEADING ──────────────────────────────────────────────────
+    // 2) HERO HEADING
     var heroWrap = document.querySelector('.framer-ru4c8b');
-    if (heroWrap) {
+    if (heroWrap && !heroWrap.querySelector('.ag-hero')) {
       var p = heroWrap.querySelector('p');
       if (p) {
-        // Si ya existe nuestro span, nada que hacer
-        var existing = heroWrap.querySelector('.ag-hero');
-        if (!existing) {
-          p.style.setProperty('font-size',   '0', 'important');
-          p.style.setProperty('line-height', '0', 'important');
-          p.style.setProperty('color',  'transparent', 'important');
-          var span = document.createElement('span');
-          span.className = 'ag-hero';
-          span.textContent = HERO_TEXT;
-          span.style.cssText = [
-            'display:block',
-            'font-size:var(--framer-font-size,inherit)',
-            'line-height:var(--framer-line-height,inherit)',
-            'font-family:inherit',
-            'font-weight:inherit',
-            'letter-spacing:inherit',
-            'color:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae,#111)',
-            'text-transform:uppercase'
-          ].join(';');
-          p.parentNode.insertBefore(span, p.nextSibling);
-          changed = true;
-        }
+        p.style.setProperty('font-size',   '0', 'important');
+        p.style.setProperty('line-height', '0', 'important');
+        p.style.setProperty('color', 'transparent', 'important');
+        var span = document.createElement('span');
+        span.className = 'ag-hero';
+        span.textContent = HERO_TEXT;
+        span.style.cssText = [
+          'display:block',
+          'font-size:var(--framer-font-size,inherit)',
+          'line-height:var(--framer-line-height,inherit)',
+          'font-family:inherit',
+          'font-weight:inherit',
+          'letter-spacing:inherit',
+          'color:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae,#111)',
+          'text-transform:uppercase'
+        ].join(';');
+        p.parentNode.insertBefore(span, p.nextSibling);
+        changed = true;
       }
     }
 
-    // ── 3) CONTADORES ────────────────────────────────────────────────────
+    // 3) CONTADORES
     document.querySelectorAll('.framer-1ddh8vd').forEach(function(el) {
       if (el.style.display !== 'none') {
         el.style.setProperty('display', 'none', 'important');
@@ -7341,37 +7329,54 @@
     return changed;
   }
 
-  // ── Bucle rAF: corre cada frame hasta que nada cambie 30 frames seguidos
+  // ── rAF hasta que todo esté estable (máx ~2s) ────────────────────────
   var stableFrames = 0;
+  var maxFrames    = 120;  // ~2 segundos a 60fps
   function rafLoop() {
     var changed = applyOverrides();
     stableFrames = changed ? 0 : stableFrames + 1;
-    if (stableFrames < 30) {          // ~0.5 s de estabilidad antes de parar rAF
+    if (stableFrames < 20 && maxFrames-- > 0) {
       requestAnimationFrame(rafLoop);
     }
   }
   requestAnimationFrame(rafLoop);
 
-  // ── setInterval de respaldo: cada 100 ms durante los primeros 10 s ───
-  var intervalId = setInterval(function() {
-    applyOverrides();
-  }, 100);
-  setTimeout(function() { clearInterval(intervalId); }, 10000);
+  // ── setInterval de respaldo: 100ms durante 8s ─────────────────────────
+  var ivId = setInterval(applyOverrides, 100);
+  setTimeout(function() { clearInterval(ivId); }, 8000);
 
-  // ── MutationObserver como tercer nivel de defensa ────────────────────
-  var observer = new MutationObserver(function() {
+  // ── MutationObserver: childList para contenido, attributes para tema ──
+  var observer = new MutationObserver(function(mutations) {
+    // Si Framer cambia framestack-theme a "dark" por el OS, lo revertimos
+    // SOLO si el usuario no ha hecho clic en el toggle manualmente
+    // Detectamos si fue un cambio automático del init (antes de 3s)
+    if (Date.now() - pageLoadTime < 3000) {
+      if (document.body.getAttribute(THEME_ATTR) === 'dark') {
+        document.body.setAttribute(THEME_ATTR, 'light');
+        document.documentElement.setAttribute(THEME_ATTR, 'light');
+      }
+    }
     applyOverrides();
-    // Reiniciar el bucle rAF si Framer vuelve a modificar algo
     stableFrames = 0;
     requestAnimationFrame(rafLoop);
   });
+
+  var pageLoadTime = Date.now();
+
   document.addEventListener('DOMContentLoaded', function() {
-    observer.observe(document.body || document.documentElement, {
-      childList: true, subtree: true
+    observer.observe(document.documentElement, {
+      childList:  true,
+      subtree:    true,
+      attributes: true,
+      attributeFilter: [THEME_ATTR, 'data-framer-theme']
     });
     applyOverrides();
   });
-  window.addEventListener('load', applyOverrides);
+
+  window.addEventListener('load', function() {
+    applyOverrides();
+    // Después de 3s, dejamos que el toggle funcione libremente
+  });
 })();
 </script>
 
