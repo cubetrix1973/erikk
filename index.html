@@ -7202,7 +7202,73 @@
       }
     }
   </style>
-  
+  <style id="unders-logo-override">
+    /* Ocultar texto Erikk® en navbar */
+    .framer-4ZWoU .framer-mgrps-container p,
+    .framer-4ZWoU .framer-mgrps-container span {
+      display: none !important;
+    }
+
+    /* Mostrar logo U_NDERS via SVG */
+    .framer-4ZWoU .framer-mgrps-container::after {
+      content: '';
+      display: block;
+      width: 140px;
+      height: 35px;
+      background-image: url('/logo-unders.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: left center;
+      margin-top: -16px !important;
+    }
+
+    .framer-4ZWoU {
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
+    }
+
+    .framer-4ZWoU .framer-mgrps-container {
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+    }
+
+    .framer-4ZWoU .framer-mgrps-container::after {
+      margin-left: 0 !important;
+      align-self: flex-start !important;
+    }
+
+    /* Fix guion bajo mobile */
+    @media (max-width: 809px) {
+      .unders-lift {
+        display: inline-block !important;
+        transform: translateY(-15px) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+    }
+
+    @media (max-width: 809px) {
+
+      .framer-4ZWoU,
+      .framer-4ZWoU .framer-mgrps-container,
+      .framer-4ZWoU .framer-mgrps-container>div {
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+      }
+
+      .framer-4ZWoU .framer-mgrps-container {
+        position: relative !important;
+      }
+
+      .framer-4ZWoU .framer-mgrps-container::after {
+        position: absolute !important;
+        left: 0 !important;
+        transform: none !important;
+      }
+    }
+  </style>
   <style id="unders-lift-fix">
     @media (max-width: 809px) {
       .unders-lift {
@@ -7216,8 +7282,9 @@
         overflow: visible !important;
       }
     }
-</style>
-  <style id="antigravity-custom-overrides">
+  </style>
+
+<style id="antigravity-custom-overrides">
     /* Forzar logo U_NDERS */
     .framer-4ZWoU {
       content: url("logo-unders.svg") !important;
@@ -7256,7 +7323,6 @@
       white-space: nowrap !important;
     }
 </style>
-
 <script id="antigravity-dom-observer">
 (function() {
   'use strict';
@@ -7379,7 +7445,6 @@
   });
 })();
 </script>
-
 </head>
 
 <body>
@@ -14963,10 +15028,7 @@
         }
 
         if (element.nodeType === 3) {
-      if (element.nodeValue) {
-        if (/How\s+We\s+Help\s+Luxury\s+Brands\s+Stand\s+Out/i.test(element.nodeValue)) {
-          element.nodeValue = "El principio de una historia que no tiene fin";
-        }
+          if (element.nodeValue) {
             // Reemplazo del titular principal (Hero Heading)
             if (/Unleashing\s+(the\s+)?Potential/i.test(element.nodeValue) || /Unleashing\s+your\s+brand/i.test(element.nodeValue)) {
               element.nodeValue = "Soluciones con inteligencia";
