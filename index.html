@@ -7494,6 +7494,109 @@
   });
 })();
 </script>
+
+<style id="ag-blog-section-css">
+/* ═══════════════ BLOG SECTION ═══════════════ */
+.ag-section-blog {
+  padding: 80px 136px;
+  background: var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, #fff);
+}
+@media (max-width: 1279px) { .ag-section-blog { padding: 60px 80px; } }
+@media (max-width: 809px)  { .ag-section-blog { padding: 48px 24px; } }
+
+/* Heading */
+.ag-blog-heading-wrap  { margin-bottom: 48px; overflow: visible; }
+.ag-blog-heading-inner { overflow: visible; }
+.ag-blog-heading-svg   { overflow: visible; height: 140px; display: block; }
+
+/* Grid */
+.ag-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 1279px) { .ag-blog-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 809px)  { .ag-blog-grid { grid-template-columns: 1fr; } }
+
+/* Card */
+.ag-blog-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, #fff);
+  border: 1px solid var(--token-68c05b50-ca7b-4173-82aa-ed42aea1a9b4, rgba(17,17,17,0.15));
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.ag-blog-card:hover { transform: translateY(-4px); }
+
+/* Image */
+.ag-blog-card__img-link {
+  display: block;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.ag-blog-card__img-link img { transition: transform 0.4s ease; }
+.ag-blog-card:hover .ag-blog-card__img-link img { transform: scale(1.04); }
+
+/* Body */
+.ag-blog-card__body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Tag */
+.ag-blog-card__tag {
+  font-family: "General Sans","General Sans Placeholder",sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(17,17,17,0.5));
+}
+
+/* Title */
+.ag-blog-card__title {
+  font-family: "General Sans","General Sans Placeholder",sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17,17,17));
+  margin: 0;
+}
+
+/* Description */
+.ag-blog-card__desc {
+  font-family: "General Sans","General Sans Placeholder",sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(17,17,17,0.5));
+  margin: 0;
+  flex: 1;
+}
+
+/* CTA */
+.ag-blog-card__cta {
+  display: inline-block;
+  font-family: "General Sans","General Sans Placeholder",sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17,17,17));
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  margin-top: auto;
+  transition: opacity 0.2s;
+}
+.ag-blog-card__cta:hover { opacity: 0.6; }
+</style>
+
 </head>
 
 <body>
@@ -10801,999 +10904,82 @@
                 </div>
               </div>
             </section>
-            <section class="framer-zgmyri" data-framer-name="Section Team">
-              <div class="framer-amcily-container">
-                <div class="framer-kPhNR framer-u2kpxy framer-v-u2kpxy" data-framer-name="Default"
-                  style="height:100%;width:100%">
-                  <div class="framer-8fv3p2" data-framer-name="Line"
-                    style="background-color:var(--token-68c05b50-ca7b-4173-82aa-ed42aea1a9b4, rgba(17, 17, 17, 0.15))">
-                  </div>
+            <section class="ag-section-blog" data-framer-name="Section Blog">
+            <!-- ── Título de sección BLOG (misma tipografía que Proyectos/Servicios) ── -->
+            <div class="ag-blog-heading-wrap">
+              <div class="ag-blog-heading-inner">
+                <svg class="ag-blog-heading-svg"
+                     data-framer-component-type="RichTextContainer"
+                     viewBox="0 0 500 146"
+                     style="overflow:visible;width:100%;max-width:900px;">
+                  <foreignObject width="100%" height="100%" class="framer-fit-text"
+                                 style="overflow:visible;transform-origin:center center">
+                    <h2 style="--framer-font-family:&quot;General Sans&quot;,sans-serif;
+                               --framer-font-size:162px;
+                               --framer-letter-spacing:0px;
+                               --framer-line-height:90%;
+                               --framer-text-color:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae,rgb(17,17,17));
+                               --framer-text-transform:uppercase;
+                               font-family:&quot;General Sans&quot;,&quot;General Sans Placeholder&quot;,sans-serif;
+                               font-size:162px;
+                               line-height:90%;
+                               letter-spacing:0px;
+                               color:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae,rgb(17,17,17));
+                               text-transform:uppercase;
+                               margin:0;
+                               white-space:nowrap;"
+                         class="framer-text">Blog</h2>
+                  </foreignObject>
+                </svg>
+              </div>
+            </div>
+
+            <!-- ── Grid de 3 tarjetas ── -->
+            <div class="ag-blog-grid">
+              <div class="ag-blog-card">
+                <a href="news/tips-and-tricks-for-creating-a-strong-brand-identity.html" class="ag-blog-card__img-link">
+                  <img src="https://framerusercontent.com/images/YRxqmgIvuY1RZ2tJanTEkczQ.webp"
+                       alt="TIPS AND TRICKS FOR CREATING A STRONG BRAND IDENTITY"
+                       loading="lazy"
+                       style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;">
+                </a>
+                <div class="ag-blog-card__body">
+                  <span class="ag-blog-card__tag">Branding</span>
+                  <h3 class="ag-blog-card__title">TIPS AND TRICKS FOR CREATING A STRONG BRAND IDENTITY</h3>
+                  <p class="ag-blog-card__desc">Craft a memorable, consistent, and strategic brand that truly connects with your audience.</p>
+                  <a href="news/tips-and-tricks-for-creating-a-strong-brand-identity.html" class="ag-blog-card__cta">READ MORE →</a>
                 </div>
               </div>
-              <div class="framer-2zfg4t" data-framer-name="Inner">
-                <div class="framer-1j6lbzj" data-framer-name="Grid">
-                  <div class="framer-2zbec1" data-framer-name="Headline">
-                    <div class="ssr-variant hidden-1vb5nd8">
-                      <div class="framer-91dixt" data-framer-component-type="RichTextContainer"
-                        style="will-change:transform;opacity:1;transform:translateY(200px)">
-                        <h2 class="framer-text framer-styles-preset-i9tly3" data-styles-preset="BZZ_AYR5d">Team</h2>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1g6n99x hidden-72rtr7"><svg class="framer-91dixt"
-                        data-framer-component-type="RichTextContainer" viewBox="0 0 352 115"
-                        style="will-change:transform;opacity:1;transform:translateY(200px)">
-                        <foreignObject width="100%" height="100%" class="framer-fit-text" transform="scale(1)"
-                          style="overflow:visible;transform-origin:center center">
-                          <h2
-                            style="--font-selector:RlM7R2VuZXJhbCBTYW5zLXJlZ3VsYXI=;--framer-font-family:&quot;General Sans&quot;, &quot;General Sans Placeholder&quot;, sans-serif;--framer-font-size:128px;--framer-line-height:90%;--framer-text-color:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(25, 25, 25));--framer-text-transform:uppercase"
-                            class="framer-text">Team</h2>
-                        </foreignObject>
-                      </svg></div>
-                  </div>
-                  <div class="framer-8vq3bn" data-framer-component-type="RichTextContainer" style="transform:none">
-                    <p class="framer-text framer-styles-preset-fottxr" data-styles-preset="h4jVEYDkM">We have assembled
-                      a team of talented and experienced professionals who are dedicated to helping you achieve your
-                      brand's full potential.</p>
-                  </div>
-                </div>
-                <div class="framer-1vmhpy0" data-framer-name="Grid">
-                  <div class="framer-b5ocw3" data-framer-name="Grid">
-                    <div class="ssr-variant hidden-1vb5nd8 hidden-1g6n99x">
-                      <div class="framer-1o467b9-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-d3fe0k"
-                          data-framer-name="Desktop" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Emily
-                                Joy</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-cursor="1bplt5i" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/3DoyIPgSaz6z60D0lHrG4wQdTAo.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/3DoyIPgSaz6z60D0lHrG4wQdTAo.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/3DoyIPgSaz6z60D0lHrG4wQdTAo.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="max((min(100vw, 1920px) - 272px) / 4, 50px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                                  Creative Director</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Leading our creative vision with strategic insights and innovative ideas.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1g6n99x hidden-72rtr7">
-                      <div class="framer-1o467b9-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-pf0wf4"
-                          data-framer-name="Phone" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Emily
-                                Joy</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/3DoyIPgSaz6z60D0lHrG4wQdTAo.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/3DoyIPgSaz6z60D0lHrG4wQdTAo.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/3DoyIPgSaz6z60D0lHrG4wQdTAo.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="calc(min(100vw, 1920px) - 48px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                                  Creative Director</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Leading our creative vision with strategic insights and innovative ideas.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1vb5nd8 hidden-72rtr7">
-                      <div class="framer-1o467b9-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-1uwjh3r"
-                          data-framer-name="Tablet" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Emily
-                                Joy</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/3DoyIPgSaz6z60D0lHrG4wQdTAo.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/3DoyIPgSaz6z60D0lHrG4wQdTAo.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/3DoyIPgSaz6z60D0lHrG4wQdTAo.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="max((min(100vw, 1920px) - 168px) / 2, 50px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                                  Creative Director</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Leading our creative vision with strategic insights and innovative ideas.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1vb5nd8 hidden-1g6n99x">
-                      <div class="framer-124tw1t-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-d3fe0k"
-                          data-framer-name="Desktop" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Kate
-                                Lee</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-cursor="4f6jtj" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/lJz1Fy4WlLJkxFTROlqL8aAuzMM.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/lJz1Fy4WlLJkxFTROlqL8aAuzMM.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/lJz1Fy4WlLJkxFTROlqL8aAuzMM.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="max((min(100vw, 1920px) - 272px) / 4, 50px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">Brand
-                                  Designer</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Crafting unique brand identities that capture the essence of your business.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1g6n99x hidden-72rtr7">
-                      <div class="framer-124tw1t-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-pf0wf4"
-                          data-framer-name="Phone" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Kate
-                                Lee</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/lJz1Fy4WlLJkxFTROlqL8aAuzMM.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/lJz1Fy4WlLJkxFTROlqL8aAuzMM.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/lJz1Fy4WlLJkxFTROlqL8aAuzMM.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="calc(min(100vw, 1920px) - 48px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">Brand
-                                  Designer</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Crafting unique brand identities that capture the essence of your business.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1vb5nd8 hidden-72rtr7">
-                      <div class="framer-124tw1t-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-1uwjh3r"
-                          data-framer-name="Tablet" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Kate
-                                Lee</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/lJz1Fy4WlLJkxFTROlqL8aAuzMM.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/lJz1Fy4WlLJkxFTROlqL8aAuzMM.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/lJz1Fy4WlLJkxFTROlqL8aAuzMM.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="max((min(100vw, 1920px) - 168px) / 2, 50px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">Brand
-                                  Designer</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Crafting unique brand identities that capture the essence of your business.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1vb5nd8 hidden-1g6n99x">
-                      <div class="framer-1xnenuy-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-d3fe0k"
-                          data-framer-name="Desktop" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Jess
-                                Chen</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-cursor="1si0bma" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/5icqrGxE29kOVQeD3mbjY2YP0Y.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/5icqrGxE29kOVQeD3mbjY2YP0Y.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/5icqrGxE29kOVQeD3mbjY2YP0Y.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="max((min(100vw, 1920px) - 272px) / 4, 50px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                                  Fashion Designer</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Creating stunning visuals that elevate your brand and capture your audience's attention.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1g6n99x hidden-72rtr7">
-                      <div class="framer-1xnenuy-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-pf0wf4"
-                          data-framer-name="Phone" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Jess
-                                Chen</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/5icqrGxE29kOVQeD3mbjY2YP0Y.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/5icqrGxE29kOVQeD3mbjY2YP0Y.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/5icqrGxE29kOVQeD3mbjY2YP0Y.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="calc(min(100vw, 1920px) - 48px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                                  Fashion Designer</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Creating stunning visuals that elevate your brand and capture your audience's attention.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1vb5nd8 hidden-72rtr7">
-                      <div class="framer-1xnenuy-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-1uwjh3r"
-                          data-framer-name="Tablet" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Jess
-                                Chen</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/5icqrGxE29kOVQeD3mbjY2YP0Y.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/5icqrGxE29kOVQeD3mbjY2YP0Y.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/5icqrGxE29kOVQeD3mbjY2YP0Y.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="max((min(100vw, 1920px) - 168px) / 2, 50px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                                  Fashion Designer</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Creating stunning visuals that elevate your brand and capture your audience's attention.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1vb5nd8 hidden-1g6n99x">
-                      <div class="framer-3bgwjl-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-d3fe0k"
-                          data-framer-name="Desktop" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Katy
-                                Yen</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-cursor="vqvc6g" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/N98LsxnDzVIgnR3pVEz72QqGE.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/N98LsxnDzVIgnR3pVEz72QqGE.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/N98LsxnDzVIgnR3pVEz72QqGE.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="max((min(100vw, 1920px) - 272px) / 4, 50px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                                  Graphic Designer</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Bringing your brand to life through thoughtful design and attention to detail.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1g6n99x hidden-72rtr7">
-                      <div class="framer-3bgwjl-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-pf0wf4"
-                          data-framer-name="Phone" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Katy
-                                Yen</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/N98LsxnDzVIgnR3pVEz72QqGE.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/N98LsxnDzVIgnR3pVEz72QqGE.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/N98LsxnDzVIgnR3pVEz72QqGE.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="calc(min(100vw, 1920px) - 48px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                                  Graphic Designer</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Bringing your brand to life through thoughtful design and attention to detail.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ssr-variant hidden-1vb5nd8 hidden-72rtr7">
-                      <div class="framer-3bgwjl-container">
-                        <div class="framer-EayJN framer-GqNBV framer-hFLAS framer-S8Ajy framer-d3fe0k framer-v-1uwjh3r"
-                          data-framer-name="Tablet" style="width:100%">
-                          <div class="framer-um65v0" data-framer-name="Grid">
-                            <div class="framer-q458s1" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;transform:none">
-                              <h3 class="framer-text framer-styles-preset-9d1pfe" data-styles-preset="szJtSwdtx">Katy
-                                Yen</h3>
-                            </div>
-                            <div class="framer-1o2e91x" data-framer-name="Image Wrapper">
-                              <div class="framer-19bb35" data-framer-name="Image"
-                                style="will-change:transform;opacity:1;transform:scale(1.15)">
-                                <div
-                                  style="position:absolute;border-radius:inherit;corner-shape:inherit;top:0;right:0;bottom:0;left:0"
-                                  data-framer-background-image-wrapper="true"><img decoding="async" width="1000"
-                                    height="1400"
-                                    sizes="(min-width: 1280px) max((min(100vw, 1920px) - 272px) / 4, 50px), (max-width: 809.98px) calc(min(100vw, 1920px) - 48px), (min-width: 810px) and (max-width: 1279.98px) max((min(100vw, 1920px) - 168px) / 2, 50px)"
-                                    srcset="https://framerusercontent.com/images/N98LsxnDzVIgnR3pVEz72QqGE.webp?scale-down-to=1024&amp;width=1000&amp;height=1400 731w,https://framerusercontent.com/images/N98LsxnDzVIgnR3pVEz72QqGE.webp?width=1000&amp;height=1400 1000w"
-                                    src="https://framerusercontent.com/images/N98LsxnDzVIgnR3pVEz72QqGE.webp?width=1000&amp;height=1400"
-                                    alt="Team Member"
-                                    style="display:block;width:100%;height:100%;border-radius:inherit;corner-shape:inherit;object-position:center;object-fit:cover"
-                                    data-framer-original-sizes="max((min(100vw, 1920px) - 168px) / 2, 50px)"></div>
-                                <div class="framer-h3n1cj-container"><!--$-->
-                                  <div
-                                    style="width:100%;height:100%;background-size:128px;background-repeat:repeat;background-image:url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');opacity:0.1;border-radius:0">
-                                  </div><!--/$-->
-                                </div>
-                              </div>
-                            </div>
-                            <div class="framer-185nzaa" data-framer-name="Grid">
-                              <div class="framer-1ocz2r0" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                                  Graphic Designer</p>
-                              </div>
-                              <div class="framer-7ycwy2" data-framer-name="Socials">
-                                <div class="framer-6ijd2b-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default"
-                                    href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-                                    target="_blank" rel="noopener"><svg class="framer-QYJ03 framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1403532491" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-13934dp-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://x.com/gola99" target="_blank"
-                                    rel="noopener"><svg class="framer-QMsyA framer-oj2vl8" role="presentation"
-                                      viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#1688045918" />
-                                    </svg></a><!--/$--></div>
-                                <div class="framer-w9flio-container"><!--$--><a
-                                    class="framer-Mh4ep framer-7cdhzl framer-v-7cdhzl framer-1q8itvs"
-                                    data-framer-name="Default" href="https://www.instagram.com/gola.design/"
-                                    target="_blank" rel="noopener"><svg class="framer-SHCqu framer-oj2vl8"
-                                      role="presentation" viewBox="0 0 24 24"
-                                      style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5;transform:none">
-                                      <use href="#942143898" />
-                                    </svg></a><!--/$--></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="framer-j112kl" data-framer-component-type="RichTextContainer"
-                            style="--extracted-r6o4lv:var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5));--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-21ogod" data-styles-preset="xZndidUCt"
-                              style="--framer-text-color:var(--extracted-r6o4lv, var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(14, 16, 17, 0.5)))">
-                              Bringing your brand to life through thoughtful design and attention to detail.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="framer-sdgjoa" data-framer-name="Grid">
-                    <div class="framer-xqopvu hidden-1vb5nd8" data-framer-name="Grid"></div>
-                    <div class="framer-10ncrl5" data-framer-name="Grid">
-                      <div class="ssr-variant hidden-1vb5nd8">
-                        <div class="framer-mc4nkb-container">
-                          <div class="framer-kPhNR framer-u2kpxy framer-v-u2kpxy" data-framer-name="Default"
-                            style="height:100%;width:100%">
-                            <div class="framer-8fv3p2" data-framer-name="Line"
-                              style="background-color:var(--token-68c05b50-ca7b-4173-82aa-ed42aea1a9b4, rgba(17, 17, 17, 0.15))">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="ssr-variant hidden-1g6n99x hidden-72rtr7">
-                        <div class="framer-mc4nkb-container">
-                          <div class="framer-kPhNR framer-u2kpxy framer-v-u2kpxy" data-framer-name="Default"
-                            style="height:100%;width:100%">
-                            <div class="framer-8fv3p2" data-framer-name="Line"
-                              style="background-color:var(--token-68c05b50-ca7b-4173-82aa-ed42aea1a9b4, rgba(17, 17, 17, 0.15))">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="framer-xcogdc" data-framer-name="Grid">
-                        <div class="framer-1x130bi" data-framer-name="Grid">
-                          <div class="framer-1y4953c" data-framer-component-type="RichTextContainer"
-                            style="transform:none">
-                            <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">Join the
-                              team</p>
-                          </div>
-                          <div class="framer-16fm3t6" data-framer-component-type="RichTextContainer"
-                            style="transform:none">
-                            <h3 class="framer-text framer-styles-preset-3nqyhf" data-styles-preset="YAP816Y5n">Want to
-                              shape the future of marketing digital?</h3>
-                          </div>
-                        </div><!--$-->
-                        <div class="framer-tlzf9l-container"><!--$--><a
-                            class="framer-fNLX0 framer-b8mZe framer-CpT9e framer-tfnc27 framer-v-rdjzkf framer-11kuw9r"
-                            data-framer-name="Primary" href="jobs.html">
-                            <div class="framer-rd91qg" data-border="true" data-framer-name="Icon"
-                              style="--border-bottom-width:0px;--border-color:var(--token-8e68fe2a-54ce-48bb-a229-0cfd0ff89ba2, rgb(17, 17, 17));--border-left-width:0px;--border-right-width:0px;--border-style:solid;--border-top-width:0px;background-color:var(--token-dca875b7-f855-43c1-bf73-97596e452266, rgb(17, 17, 17));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px;transform:none">
-                              <svg class="framer-mbPBj framer-wrgz0d" role="presentation" viewBox="0 0 24 24"
-                                style="--1m6trwb:0;--21h8s6:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));--pgex8v:1.5">
-                                <use href="#3642559178" />
-                              </svg></div>
-                            <div class="framer-1sorfw9" data-framer-name="Inner">
-                              <div class="framer-19tagh8" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-1593v8y" data-styles-preset="giF3TXwde">Find
-                                  Job</p>
-                              </div>
-                              <div class="framer-1jkjrc4" data-framer-component-type="RichTextContainer"
-                                style="--framer-paragraph-spacing:0px;transform:none">
-                                <p class="framer-text framer-styles-preset-swuwne" data-styles-preset="jeIIip8Yb">Find
-                                  Job</p>
-                              </div>
-                            </div>
-                          </a><!--/$--></div><!--/$-->
-                      </div>
-                    </div>
-                  </div>
+              <div class="ag-blog-card">
+                <a href="news/what-you-need-to-know-to-stay-ahead-of-the-curve.html" class="ag-blog-card__img-link">
+                  <img src="https://framerusercontent.com/images/EKXBhGYRH8P0H9JUMBlQwmOuQEk.webp"
+                       alt="WHAT YOU NEED TO KNOW TO STAY AHEAD OF THE CURVE"
+                       loading="lazy"
+                       style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;">
+                </a>
+                <div class="ag-blog-card__body">
+                  <span class="ag-blog-card__tag">Marketing</span>
+                  <h3 class="ag-blog-card__title">WHAT YOU NEED TO KNOW TO STAY AHEAD OF THE CURVE</h3>
+                  <p class="ag-blog-card__desc">Adapt, innovate, and understand your audience to stay competitive in today's market.</p>
+                  <a href="news/what-you-need-to-know-to-stay-ahead-of-the-curve.html" class="ag-blog-card__cta">READ MORE →</a>
                 </div>
               </div>
-            </section>
+              <div class="ag-blog-card">
+                <a href="news/e-commerce-strategies-for-success.html" class="ag-blog-card__img-link">
+                  <img src="https://framerusercontent.com/images/yr99IuMHunFu0m4grKvpcLRJAZE.webp"
+                       alt="E-COMMERCE STRATEGIES FOR SUCCESS"
+                       loading="lazy"
+                       style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;">
+                </a>
+                <div class="ag-blog-card__body">
+                  <span class="ag-blog-card__tag">E-Commerce</span>
+                  <h3 class="ag-blog-card__title">E-COMMERCE STRATEGIES FOR SUCCESS</h3>
+                  <p class="ag-blog-card__desc">Boost conversions with smart UX, personalization, and data-driven decisions.</p>
+                  <a href="news/e-commerce-strategies-for-success.html" class="ag-blog-card__cta">READ MORE →</a>
+                </div>
+              </div>
+            </div>
+          </section>
           </main>
           <div class="framer-1hmgifw-container">
             <div class="ssr-variant hidden-1vb5nd8 hidden-1g6n99x">
