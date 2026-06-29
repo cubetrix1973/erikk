@@ -7259,125 +7259,119 @@
 
 <script id="antigravity-dom-observer">
 (function() {
+  'use strict';
+
+  var HERO_TEXT = 'EL PRINCIPIO DE UNA HISTORIA QUE NO TIENE FIN';
+  var LOGO_SRC  = 'logo-unders.svg';
+
   function applyOverrides() {
-    // 1) Logo: si el elemento contiene texto ERIKK o un img sin logo-unders, forzar svg
+    var changed = false;
+
+    // ── 1) LOGO ──────────────────────────────────────────────────────────
     var logo = document.querySelector('.framer-4ZWoU');
     if (logo) {
+      // Caso A: Framer renderiza un <img>
       var img = logo.querySelector('img');
       if (img) {
-        if (!img.src || !img.src.includes('logo-unders.svg')) {
-          img.src = 'logo-unders.svg';
-          img.style.setProperty('width', '55px', 'important');
+        if (!img.src.includes('logo-unders')) {
+          img.src = LOGO_SRC;
+          img.style.setProperty('width',  '55px', 'important');
           img.style.setProperty('height', 'auto', 'important');
+          changed = true;
         }
       } else {
-        // no img tag - check if content override is working, otherwise hide inner text and add img
-        if (logo.innerHTML && !logo.innerHTML.includes('logo-unders.svg')) {
+        // Caso B: Framer renderiza texto (ERIKK®)
+        if (!logo.querySelector('img.ag-logo')) {
+          // Ocultar texto
+          Array.from(logo.childNodes).forEach(function(n) {
+            if (n.nodeType === Node.TEXT_NODE || n.tagName === 'SPAN') {
+              n.style && n.style.setProperty('display', 'none', 'important');
+            }
+          });
           logo.style.setProperty('font-size', '0', 'important');
           logo.style.setProperty('color', 'transparent', 'important');
-          var existing = logo.querySelector('img.ag-logo-override');
-          if (!existing) {
-            var imgEl = document.createElement('img');
-            imgEl.src = 'logo-unders.svg';
-            imgEl.className = 'ag-logo-override';
-            imgEl.style.cssText = 'width:55px;height:auto;display:inline-block;';
-            logo.insertBefore(imgEl, logo.firstChild);
-          }
+          var imgEl = document.createElement('img');
+          imgEl.src = LOGO_SRC;
+          imgEl.className = 'ag-logo';
+          imgEl.style.cssText = 'width:55px;height:auto;display:block;';
+          logo.prepend(imgEl);
+          changed = true;
         }
       }
     }
 
-    // 2) Hero heading: si el texto no es el español correcto, reemplazar
-    var heroContainer = document.querySelector('.framer-ru4c8b');
-    if (heroContainer) {
-      var p = heroContainer.querySelector('p');
-      if (p && p.textContent && p.textContent.trim() !== '' && !p.classList.contains('ag-overridden')) {
-        p.style.setProperty('font-size', '0', 'important');
-        p.style.setProperty('line-height', '0', 'important');
-        // Check if we already added a span override
-        var existing = heroContainer.querySelector('.ag-hero-text');
+    // ── 2) HERO HEADING ──────────────────────────────────────────────────
+    var heroWrap = document.querySelector('.framer-ru4c8b');
+    if (heroWrap) {
+      var p = heroWrap.querySelector('p');
+      if (p) {
+        // Si ya existe nuestro span, nada que hacer
+        var existing = heroWrap.querySelector('.ag-hero');
         if (!existing) {
+          p.style.setProperty('font-size',   '0', 'important');
+          p.style.setProperty('line-height', '0', 'important');
+          p.style.setProperty('color',  'transparent', 'important');
           var span = document.createElement('span');
-          span.className = 'ag-hero-text';
-          span.textContent = 'EL PRINCIPIO DE UNA HISTORIA QUE NO TIENE FIN';
+          span.className = 'ag-hero';
+          span.textContent = HERO_TEXT;
           span.style.cssText = [
             'display:block',
-            'font-size:var(--framer-font-size, inherit)',
-            'line-height:var(--framer-line-height, inherit)',
+            'font-size:var(--framer-font-size,inherit)',
+            'line-height:var(--framer-line-height,inherit)',
             'font-family:inherit',
             'font-weight:inherit',
             'letter-spacing:inherit',
-            'color:inherit',
-            'text-transform:inherit',
+            'color:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae,#111)',
+            'text-transform:uppercase'
           ].join(';');
           p.parentNode.insertBefore(span, p.nextSibling);
+          changed = true;
         }
-        p.classList.add('ag-overridden');
       }
     }
 
-    // 3) Contadores: ocultar
-    var counters = document.querySelectorAll('.framer-1ddh8vd');
-    counters.forEach(function(el) {
-      el.style.setProperty('display', 'none', 'important');
+    // ── 3) CONTADORES ────────────────────────────────────────────────────
+    document.querySelectorAll('.framer-1ddh8vd').forEach(function(el) {
+      if (el.style.display !== 'none') {
+        el.style.setProperty('display', 'none', 'important');
+        changed = true;
+      }
     });
 
-    // 4) Titular "OUR VISION" -> "CÓDIGO PROPIO"
-    var visionContainer = document.querySelector('.framer-1c69ft1');
-    if (visionContainer) {
-      var h2 = visionContainer.querySelector('h2');
-      if (h2) {
-        var text = h2.textContent.trim().toUpperCase();
-        if (text.includes('VISION') || text.includes('OUR') || (text !== '' && !text.includes('CÓDIGO'))) {
-          h2.style.setProperty('font-size', '0', 'important');
-          h2.style.setProperty('line-height', '0', 'important');
-          h2.style.setProperty('overflow', 'visible', 'important');
-          if (!h2.querySelector('.ag-vision-text')) {
-            var span = document.createElement('span');
-            span.className = 'ag-vision-text';
-            span.textContent = 'CÓDIGO PROPIO';
-            span.style.cssText = [
-              'display:block',
-              'font-size:110px',
-              'line-height:90%',
-              'font-family:inherit',
-              'font-weight:inherit',
-              'letter-spacing:inherit',
-              'color:inherit',
-              'text-transform:uppercase',
-              'white-space:nowrap',
-            ].join(';');
-            h2.appendChild(span);
-          }
-        }
-      }
+    return changed;
+  }
+
+  // ── Bucle rAF: corre cada frame hasta que nada cambie 30 frames seguidos
+  var stableFrames = 0;
+  function rafLoop() {
+    var changed = applyOverrides();
+    stableFrames = changed ? 0 : stableFrames + 1;
+    if (stableFrames < 30) {          // ~0.5 s de estabilidad antes de parar rAF
+      requestAnimationFrame(rafLoop);
     }
   }
+  requestAnimationFrame(rafLoop);
 
-  // Run immediately
-  applyOverrides();
+  // ── setInterval de respaldo: cada 100 ms durante los primeros 10 s ───
+  var intervalId = setInterval(function() {
+    applyOverrides();
+  }, 100);
+  setTimeout(function() { clearInterval(intervalId); }, 10000);
 
-  // Run on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', applyOverrides);
-  }
-
-  // Run after full page load
+  // ── MutationObserver como tercer nivel de defensa ────────────────────
+  var observer = new MutationObserver(function() {
+    applyOverrides();
+    // Reiniciar el bucle rAF si Framer vuelve a modificar algo
+    stableFrames = 0;
+    requestAnimationFrame(rafLoop);
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    observer.observe(document.body || document.documentElement, {
+      childList: true, subtree: true
+    });
+    applyOverrides();
+  });
   window.addEventListener('load', applyOverrides);
-
-  // MutationObserver for continuous correction
-  var observer = new MutationObserver(function(mutations) {
-    // Debounce to avoid infinite loops
-    clearTimeout(window._agObserverTimer);
-    window._agObserverTimer = setTimeout(applyOverrides, 50);
-  });
-
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-    attributes: false,
-    characterData: false
-  });
 })();
 </script>
 
