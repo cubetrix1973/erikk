@@ -1367,6 +1367,9 @@
 
     if (element.nodeType === 3) {
       if (element.nodeValue) {
+        if (/How\s+We\s+Help\s+Luxury\s+Brands\s+Stand\s+Out/i.test(element.nodeValue)) {
+          element.nodeValue = "El principio de una historia que no tiene fin";
+        }
         // Reemplazo de la descripción larga en inglés
         if (/Comprehensive\s+(branding|marketing\s+digital)\s+solutions/i.test(element.nodeValue)) {
           element.nodeValue = "Agencia de marketing digital que inyecta Inteligencia Artificial al ADN de las marcas con el objetivo de diseñar su mañana.";

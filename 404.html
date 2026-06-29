@@ -1514,6 +1514,9 @@ window.addEventListener('load', function() {
 
     if (element.nodeType === 3) {
       if (element.nodeValue) {
+        if (/How\s+We\s+Help\s+Luxury\s+Brands\s+Stand\s+Out/i.test(element.nodeValue)) {
+          element.nodeValue = "El principio de una historia que no tiene fin";
+        }
         // Reemplazo del titular principal (Hero Heading)
         if (/Unleashing\s+(the\s+)?Potential/i.test(element.nodeValue) || /Unleashing\s+your\s+brand/i.test(element.nodeValue)) {
           element.nodeValue = "Soluciones con inteligencia";
