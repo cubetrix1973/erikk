@@ -6,6 +6,38 @@
 <!-- Mirrored from erikk-template.framer.website/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Jun 2026 18:29:03 GMT -->
 
 <head>
+<script id="ag-force-light-mode">
+// Forzar modo claro ANTES de que Framer inicialice
+// Framer lee: 1) data-framer-theme en body, 2) framestack-theme en body,
+//             3) cookie framestack-theme, 4) prefers-color-scheme del OS
+(function() {
+  var ATTR = 'framestack-theme';
+  // 1. En html (disponible ahora mismo)
+  document.documentElement.setAttribute(ATTR, 'light');
+  document.documentElement.setAttribute('data-framer-theme', 'light');
+  // 2. Cookie para que Framer no use la guardada en oscuro
+  document.cookie = ATTR + '=light; path=/; max-age=31536000';
+  // 3. En body cuando exista
+  function setBody() {
+    if (document.body) {
+      document.body.setAttribute(ATTR, 'light');
+      document.body.setAttribute('data-framer-theme', 'light');
+    }
+  }
+  setBody();
+  document.addEventListener('DOMContentLoaded', setBody);
+  // 4. Vigilar si Framer lo cambia durante los primeros 5s y revertirlo
+  var guard = setInterval(function() {
+    var cur = document.documentElement.getAttribute(ATTR);
+    if (cur === 'dark') {
+      document.documentElement.setAttribute(ATTR, 'light');
+      if (document.body) document.body.setAttribute(ATTR, 'light');
+    }
+  }, 50);
+  setTimeout(function() { clearInterval(guard); }, 5000);
+})();
+</script>
+
   <style>
     a[href*="azure"] img[alt="Preview Image #1"] {
       content: url('/proyecto1.png') !important;
@@ -7283,6 +7315,23 @@
       }
     }
   </style>
+
+
+<style id="ag-force-light-css">
+  /* Forzar fondo blanco y texto oscuro (modo claro) independientemente del tema OS */
+  html[framestack-theme="light"] body,
+  body[framestack-theme="light"],
+  html:not([framestack-theme="dark"]) body {
+    --token-c5c4fdcb-9482-48bb-aedf-353188472aae: #111 !important;
+    --token-c5446a54-80de-4f79-b24b-55997bf1fe5e: #fff !important;
+    --token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e: #11111180 !important;
+    --token-d65913ad-f961-467c-89e1-937264b2cda0: #fff9 !important;
+    --token-4321a524-8651-4268-85f9-e884d8cb6223: #fff !important;
+    --token-5087bb56-e67b-4acc-afc9-0cb2e336d0c2: #1111110a !important;
+    --token-dca875b7-f855-43c1-bf73-97596e452266: #111 !important;
+    --token-8e68fe2a-54ce-48bb-a229-0cfd0ff89ba2: #111 !important;
+  }
+</style>
 
 <style id="antigravity-custom-overrides">
     /* Forzar logo U_NDERS */
