@@ -1495,58 +1495,58 @@
         }
         // Reemplazo de 01: Branding -> marketing digital
         if (/Branding/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/Branding/gi, 'marketing digital');
+          element.nodeValue = element.nodeValue.replace(/Branding/gi, 'Marketing Digital');
         }
         if (/BRANDING/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/BRANDING/gi, 'MARKETING DIGITAL');
+          element.nodeValue = element.nodeValue.replace(/BRANDING/gi, 'Marketing Digital');
         }
         // Reemplazo de 02: Campaigns -> diseño web
         if (/Campaigns/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/Campaigns/gi, 'diseño web');
+          element.nodeValue = element.nodeValue.replace(/Campaigns/gi, 'Diseño Web');
         }
         if (/CAMPAIGNS/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/CAMPAIGNS/gi, 'DISEÑO WEB');
+          element.nodeValue = element.nodeValue.replace(/CAMPAIGNS/gi, 'Diseño Web');
         }
         // Reemplazo de 03: E-Commerce -> automatizaciones
         if (/E-Commerce/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/E-Commerce/gi, 'automatizaciones');
+          element.nodeValue = element.nodeValue.replace(/E-Commerce/gi, 'Automatizaciones');
         }
         if (/E-COMMERCE/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/E-COMMERCE/gi, 'AUTOMATIZACIONES');
+          element.nodeValue = element.nodeValue.replace(/E-COMMERCE/gi, 'Automatizaciones');
         }
         if (/Social\s+Media/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/Social\s+Media/gi, 'analisis de datos');
+          element.nodeValue = element.nodeValue.replace(/Social\s+Media/gi, "Diseño de App's");
         }
         if (/SOCIAL\s+MEDIA/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/SOCIAL\s+MEDIA/gi, 'ANALISIS DE DATOS');
+          element.nodeValue = element.nodeValue.replace(/SOCIAL\s+MEDIA/gi, "Diseño de App's");
         }
         // Reemplazo de descripciones de servicios individuales en el observer
         if (/Establish\s+a\s+strong\s+brand\s+identity/i.test(element.nodeValue)) {
-          element.nodeValue = "Lleva tu marca a otro nivel";
+          element.nodeValue = "Atraemos clientes que realmente te buscan con estrategias de precisión";
         }
         if (/Utilize\s+data\s+and\s+analytics\s+to\s+optimize/i.test(element.nodeValue)) {
-          element.nodeValue = "Tu imagen empieza en tu web";
+          element.nodeValue = "Tu imagen empieza en tu web, diseñamos páginas que atraen";
         }
         if (/Develop\s+customized\s+online\s+stores/i.test(element.nodeValue)) {
-          element.nodeValue = "Optimiza tu tiempo y genera ingresos";
+          element.nodeValue = "Diseñamos sistemas automáticos que transforman procesos manuales";
         }
         if (/Create\s+engaging\s+and\s+shareable\s+content/i.test(element.nodeValue)) {
-          element.nodeValue = "La informacion que garantiza tu éxito";
+          element.nodeValue = "Creamos aplicaciones a medida que mejoran la experiencia de tus clientes";
         }
         
         // Reemplazo de los botones "+ info"
-        if (/About\s+Marketing\s+digital/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/About\s+Marketing\s+digital/gi, '+ info');
-        }
-        if (/About\s+diseño\s+web/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/About\s+diseño\s+web/gi, '+ info');
-        }
-        if (/About\s+automatizaciones/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/About\s+automatizaciones/gi, '+ info');
-        }
-        if (/About\s+analisis\s+de\s+datos/i.test(element.nodeValue)) {
-          element.nodeValue = element.nodeValue.replace(/About\s+analisis\s+de\s+datos/gi, '+ info');
-        }
+        if (/About\s+Marketing\s+digital/i.test(element.nodeValue) || /About\s+Marketing\s+Digital/i.test(element.nodeValue)) {
+              element.nodeValue = element.nodeValue.replace(/About\s+Marketing\s+digital/gi, '+ info').replace(/About\s+Marketing\s+Digital/gi, '+ info');
+            }
+        if (/About\s+diseño\s+web/i.test(element.nodeValue) || /About\s+Diseño\s+Web/i.test(element.nodeValue)) {
+              element.nodeValue = element.nodeValue.replace(/About\s+diseño\s+web/gi, '+ info').replace(/About\s+Diseño\s+Web/gi, '+ info');
+            }
+        if (/About\s+automatizaciones/i.test(element.nodeValue) || /About\s+Automatizaciones/i.test(element.nodeValue)) {
+              element.nodeValue = element.nodeValue.replace(/About\s+automatizaciones/gi, '+ info').replace(/About\s+Automatizaciones/gi, '+ info');
+            }
+        if (/About\s+analisis\s+de\s+datos/i.test(element.nodeValue) || /About\s+diseño\s+de\s+App/i.test(element.nodeValue) || /About\s+Diseño\s+de\s+App/i.test(element.nodeValue)) {
+              element.nodeValue = element.nodeValue.replace(/About\s+analisis\s+de\s+datos/gi, '+ info').replace(/About\s+diseño\s+de\s+App.*/gi, '+ info').replace(/About\s+Diseño\s+de\s+App.*/gi, '+ info');
+            }
         
         // Reemplazo de los botones "Discover" -> "+ info"
         if (element.nodeValue.trim() === "Discover") {
@@ -1616,10 +1616,10 @@
             element.parentNode.setAttribute('href', 'https://playapadre.com/');
           }
           // Para cambiar los servicios agrupados en la lista de servicios del proyecto
-          if (element.nodeValue.trim() === "Diseño web" || element.nodeValue.trim() === "DISEÑO WEB" || element.nodeValue.trim() === "diseño web") {
-            element.nodeValue = "DISEÑO WEB; ANALISIS DE DATOS Y SEO";
+          if (element.nodeValue.trim() === "Diseño web" || element.nodeValue.trim() === "Diseño Web" || element.nodeValue.trim() === "Diseño Web") {
+            element.nodeValue = "DISEÑO WEB; DISEÑO DE APP´S Y SEO";
           }
-          if (element.nodeValue.trim() === "Análisis de datos" || element.nodeValue.trim() === "ANALISIS DE DATOS" || element.nodeValue.trim() === "ANÁLISIS DE DATOS" || element.nodeValue.trim() === "analisis de datos") {
+          if (element.nodeValue.trim() === "Diseño de App´s" || element.nodeValue.trim() === "Diseño de App's" || element.nodeValue.trim() === "Diseño de App's" || element.nodeValue.trim() === "Diseño de App's") {
             element.nodeValue = ""; // Ocultamos el nodo repetido
           }
         }
@@ -1633,9 +1633,9 @@
         }
         
         // Reemplazo de la descripción de Frou Frou (Sage)
-        // En el HTML original está traducido como "analisis de datos Campaign: Building brand awareness and engagement." o similar. Usamos regex para interceptarlo de forma robusta.
+        // En el HTML original está traducido como "diseño de App's Campaign: Building brand awareness and engagement." o similar. Usamos regex para interceptarlo de forma robusta.
         if (/(analisis\s+de\s+datos|Social\s+Media|Campaign)\s*Campaign:\s*Building\s*brand\s*awareness/i.test(element.nodeValue) || /Building\s*brand\s*awareness\s*and\s*engagement/i.test(element.nodeValue)) {
-          element.nodeValue = "Acciones: Diseño de landing pages, campañas de búsqueda y análisis de datos";
+          element.nodeValue = "Acciones: Diseño de landing pages, campañas de búsqueda y diseño de App´s";
         }
       }
     } else {
