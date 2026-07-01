@@ -7383,11 +7383,12 @@
   // ── Forzar modo claro al inicio (antes de que Framer lea el atributo) ─
   // Framer lee body[framestack-theme] en su init; si no existe usa prefers-color-scheme
   // Lo ponemos a "light" YA para que el toggle parta de modo claro
-  document.body.setAttribute(THEME_ATTR, 'light');
-  document.documentElement.setAttribute(THEME_ATTR, 'light');
+  if (document.body) document.body.setAttribute(THEME_ATTR, 'light');
+  if (document.documentElement) document.documentElement.setAttribute(THEME_ATTR, 'light');
 
   // ── Núcleo: aplicar overrides de contenido ────────────────────────────
   function applyOverrides() {
+    console.log('applyOverrides running...');
     var changed = false;
 
     // 1) LOGO
@@ -7441,6 +7442,28 @@
       }
     });
 
+    // 4) INYECCIÓN DINÁMICA DEL BLOG (evitar que React lo borre al hidratar)
+    var injectedBlog = document.getElementById('ag-blog-injected');
+    if (!injectedBlog) {
+      var clientsSection = document.querySelector('.framer-1h2e67f');
+      var template = document.getElementById('ag-blog-template');
+      console.log('Intentando inyectar blog. clientsSection:', clientsSection, 'template:', template);
+      if (clientsSection && template) {
+        var clone = template.content ? template.content.cloneNode(true) : template.cloneNode(true);
+        var firstEl = clone.querySelector('.ag-section-blog') || clone.firstElementChild;
+        if (firstEl) {
+          firstEl.id = 'ag-blog-injected';
+          clientsSection.parentNode.insertBefore(clone, clientsSection.nextSibling);
+          console.log('Inyección de blog completada exitosamente.');
+          changed = true;
+        } else {
+          console.log('firstEl no encontrado en el clone.');
+        }
+      } else {
+        console.log('Falta clientsSection o template para inyectar.');
+      }
+    }
+
     return changed;
   }
 
@@ -7456,9 +7479,9 @@
   }
   requestAnimationFrame(rafLoop);
 
-  // ── setInterval de respaldo: 100ms durante 8s ─────────────────────────
-  var ivId = setInterval(applyOverrides, 100);
-  setTimeout(function() { clearInterval(ivId); }, 8000);
+  // ── setInterval de respaldo: corre indefinidamente para evitar que React lo quite en hydration ──
+  var ivId = setInterval(applyOverrides, 150);
+
 
   // ── MutationObserver: childList para contenido, attributes para tema ──
   var observer = new MutationObserver(function(mutations) {
@@ -7466,9 +7489,9 @@
     // SOLO si el usuario no ha hecho clic en el toggle manualmente
     // Detectamos si fue un cambio automático del init (antes de 3s)
     if (Date.now() - pageLoadTime < 3000) {
-      if (document.body.getAttribute(THEME_ATTR) === 'dark') {
-        document.body.setAttribute(THEME_ATTR, 'light');
-        document.documentElement.setAttribute(THEME_ATTR, 'light');
+      if (document.body && document.body.getAttribute(THEME_ATTR) === 'dark') {
+        if (document.body) document.body.setAttribute(THEME_ATTR, 'light');
+        if (document.documentElement) document.documentElement.setAttribute(THEME_ATTR, 'light');
       }
     }
     applyOverrides();
@@ -7479,6 +7502,7 @@
   var pageLoadTime = Date.now();
 
   document.addEventListener('DOMContentLoaded', function() {
+    if (document.body) document.body.setAttribute(THEME_ATTR, 'light');
     observer.observe(document.documentElement, {
       childList:  true,
       subtree:    true,
@@ -7496,107 +7520,169 @@
 </script>
 
 <style id="ag-blog-section-css">
+/* Cargar fuentes explícitamente para que estén disponibles en la Home */
+@font-face {
+  font-family: "General Sans";
+  src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/MFQT7HFGCR2L5ULQTW6YXYZXXHMPKLJ3/YWQ244D6TACUX5JBKATPOW5I5MGJ3G73/7YY3ZAAE3TRV2LANYOLXNHTPHLXVWTKH.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/3RZHWSNONLLWJK3RLPEKUZOMM56GO4LJ/BPDRY7AHVI3MCDXXVXTQQ76H3UXA63S3/SB2OEB6IKZPRR6JT4GFJ2TFT6HBB6AZN.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
 /* ═══════════════ BLOG SECTION ═══════════════ */
 .ag-section-blog {
-  padding: 80px 136px;
-  background: var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, #fff);
+  width: 100%;
+  margin-top: -64px !important;
+  padding: 0 136px 80px;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
 }
-@media (max-width: 1279px) { .ag-section-blog { padding: 60px 80px; } }
-@media (max-width: 809px)  { .ag-section-blog { padding: 48px 24px; } }
+.framer-h60dpj,
+main.framer-h60dpj {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+[style*="position: sticky"],
+[style*="position:sticky"] {
+  will-change: transform !important;
+  transform: translateZ(0) !important;
+}
+footer,
+.framer-1hmgifw-container,
+.framer-s5vdhb-container {
+  will-change: transform !important;
+  transform: translateZ(0) !important;
+  box-shadow: none !important;
+}
+@media (max-width: 1279px) { .ag-section-blog { margin-top: -48px !important; padding: 0 80px 60px; } }
+@media (max-width: 809px)  { .ag-section-blog { margin-top: -32px !important; padding: 0 24px 48px; } }
 
-/* Heading */
-.ag-blog-heading-wrap  { margin-bottom: 48px; overflow: visible; }
-.ag-blog-heading-inner { overflow: visible; }
-.ag-blog-heading-svg   { overflow: visible; height: 140px; display: block; }
+/* Heading alignment */
+.ag-section-blog .framer-c24omt {
+  align-items: flex-start !important;
+  place-content: flex-start !important;
+  text-align: left !important;
+}
+.ag-section-blog .framer-jy9ig2 {
+  align-self: flex-start !important;
+}
+.ag-section-blog foreignObject h2,
+.ag-section-blog foreignObject p {
+  text-align: left !important;
+}
+.ag-blog-heading-wrap  { margin-bottom: 48px; margin-top: -32px !important; overflow: visible; }
 
 /* Grid */
 .ag-blog-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
 }
-@media (max-width: 1279px) { .ag-blog-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 809px)  { .ag-blog-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1279px) { .ag-blog-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+@media (max-width: 809px)  { .ag-blog-grid { grid-template-columns: 1fr; gap: 24px; } }
 
 /* Card */
 .ag-blog-card {
   display: flex;
   flex-direction: column;
-  background: var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, #fff);
-  border: 1px solid var(--token-68c05b50-ca7b-4173-82aa-ed42aea1a9b4, rgba(17,17,17,0.15));
+  background: transparent;
+  border: none;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  gap: 16px;
 }
-.ag-blog-card:hover { transform: translateY(-4px); }
 
 /* Image */
 .ag-blog-card__img-link {
   display: block;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
 }
-.ag-blog-card__img-link img { transition: transform 0.4s ease; }
-.ag-blog-card:hover .ag-blog-card__img-link img { transform: scale(1.04); }
+.ag-blog-card__img-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: grayscale(100%);
+}
+.ag-blog-card:hover .ag-blog-card__img-link img {
+  transform: scale(1.04);
+  filter: grayscale(0%);
+}
 
 /* Body */
 .ag-blog-card__body {
-  padding: 24px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
   flex: 1;
 }
 
-/* Tag */
-.ag-blog-card__tag {
-  font-family: "General Sans","General Sans Placeholder",sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(17,17,17,0.5));
-}
-
 /* Title */
 .ag-blog-card__title {
-  font-family: "General Sans","General Sans Placeholder",sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17,17,17));
-  margin: 0;
+  font-family: "General Sans", "General Sans Placeholder", sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  line-height: 140% !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  color: var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17)) !important;
+  margin: 0 !important;
 }
 
 /* Description */
 .ag-blog-card__desc {
-  font-family: "General Sans","General Sans Placeholder",sans-serif;
+  font-family: "General Sans", "General Sans Placeholder", sans-serif;
   font-size: 14px;
-  line-height: 1.6;
-  color: var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(17,17,17,0.5));
+  line-height: 1.5;
+  color: var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(17, 17, 17, 0.5));
   margin: 0;
-  flex: 1;
 }
 
 /* CTA */
 .ag-blog-card__cta {
-  display: inline-block;
-  font-family: "General Sans","General Sans Placeholder",sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Roboto Mono", monospace;
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
+  font-weight: 500;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17,17,17));
+  color: var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));
   text-decoration: none;
-  border-bottom: 1px solid currentColor;
-  padding-bottom: 2px;
-  margin-top: auto;
+  margin-top: 12px;
   transition: opacity 0.2s;
 }
-.ag-blog-card__cta:hover { opacity: 0.6; }
-</style>
+.ag-blog-card__cta:hover { opacity: 0.7; }
 
+.ag-blog-card__cta-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--token-dca875b7-f855-43c1-bf73-97596e452266, rgb(17, 17, 17));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.ag-blog-card__cta-icon svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));
+}
+.ag-blog-card:hover .ag-blog-card__cta-icon {
+  transform: rotate(45deg);
+}
+</style>
+<style id="ag-hide-team">section.framer-zgmyri { display: none !important; }</style>
 </head>
 
 <body>
@@ -10904,82 +10990,7 @@
                 </div>
               </div>
             </section>
-            <section class="ag-section-blog" data-framer-name="Section Blog">
-            <!-- ── Título de sección BLOG (misma tipografía que Proyectos/Servicios) ── -->
-            <div class="ag-blog-heading-wrap">
-              <div class="ag-blog-heading-inner">
-                <svg class="ag-blog-heading-svg"
-                     data-framer-component-type="RichTextContainer"
-                     viewBox="0 0 500 146"
-                     style="overflow:visible;width:100%;max-width:900px;">
-                  <foreignObject width="100%" height="100%" class="framer-fit-text"
-                                 style="overflow:visible;transform-origin:center center">
-                    <h2 style="--framer-font-family:&quot;General Sans&quot;,sans-serif;
-                               --framer-font-size:162px;
-                               --framer-letter-spacing:0px;
-                               --framer-line-height:90%;
-                               --framer-text-color:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae,rgb(17,17,17));
-                               --framer-text-transform:uppercase;
-                               font-family:&quot;General Sans&quot;,&quot;General Sans Placeholder&quot;,sans-serif;
-                               font-size:162px;
-                               line-height:90%;
-                               letter-spacing:0px;
-                               color:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae,rgb(17,17,17));
-                               text-transform:uppercase;
-                               margin:0;
-                               white-space:nowrap;"
-                         class="framer-text">Blog</h2>
-                  </foreignObject>
-                </svg>
-              </div>
-            </div>
-
-            <!-- ── Grid de 3 tarjetas ── -->
-            <div class="ag-blog-grid">
-              <div class="ag-blog-card">
-                <a href="news/tips-and-tricks-for-creating-a-strong-brand-identity.html" class="ag-blog-card__img-link">
-                  <img src="https://framerusercontent.com/images/YRxqmgIvuY1RZ2tJanTEkczQ.webp"
-                       alt="TIPS AND TRICKS FOR CREATING A STRONG BRAND IDENTITY"
-                       loading="lazy"
-                       style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;">
-                </a>
-                <div class="ag-blog-card__body">
-                  <span class="ag-blog-card__tag">Branding</span>
-                  <h3 class="ag-blog-card__title">TIPS AND TRICKS FOR CREATING A STRONG BRAND IDENTITY</h3>
-                  <p class="ag-blog-card__desc">Craft a memorable, consistent, and strategic brand that truly connects with your audience.</p>
-                  <a href="news/tips-and-tricks-for-creating-a-strong-brand-identity.html" class="ag-blog-card__cta">READ MORE →</a>
-                </div>
-              </div>
-              <div class="ag-blog-card">
-                <a href="news/what-you-need-to-know-to-stay-ahead-of-the-curve.html" class="ag-blog-card__img-link">
-                  <img src="https://framerusercontent.com/images/EKXBhGYRH8P0H9JUMBlQwmOuQEk.webp"
-                       alt="WHAT YOU NEED TO KNOW TO STAY AHEAD OF THE CURVE"
-                       loading="lazy"
-                       style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;">
-                </a>
-                <div class="ag-blog-card__body">
-                  <span class="ag-blog-card__tag">Marketing</span>
-                  <h3 class="ag-blog-card__title">WHAT YOU NEED TO KNOW TO STAY AHEAD OF THE CURVE</h3>
-                  <p class="ag-blog-card__desc">Adapt, innovate, and understand your audience to stay competitive in today's market.</p>
-                  <a href="news/what-you-need-to-know-to-stay-ahead-of-the-curve.html" class="ag-blog-card__cta">READ MORE →</a>
-                </div>
-              </div>
-              <div class="ag-blog-card">
-                <a href="news/e-commerce-strategies-for-success.html" class="ag-blog-card__img-link">
-                  <img src="https://framerusercontent.com/images/yr99IuMHunFu0m4grKvpcLRJAZE.webp"
-                       alt="E-COMMERCE STRATEGIES FOR SUCCESS"
-                       loading="lazy"
-                       style="display:block;width:100%;height:100%;object-fit:cover;object-position:center;">
-                </a>
-                <div class="ag-blog-card__body">
-                  <span class="ag-blog-card__tag">E-Commerce</span>
-                  <h3 class="ag-blog-card__title">E-COMMERCE STRATEGIES FOR SUCCESS</h3>
-                  <p class="ag-blog-card__desc">Boost conversions with smart UX, personalization, and data-driven decisions.</p>
-                  <a href="news/e-commerce-strategies-for-success.html" class="ag-blog-card__cta">READ MORE →</a>
-                </div>
-              </div>
-            </div>
-          </section>
+            <!-- The Blog section will be dynamically injected here in runtime by the DOM Observer to prevent React hydration issues. -->
           </main>
           <div class="framer-1hmgifw-container">
             <div class="ssr-variant hidden-1vb5nd8 hidden-1g6n99x">
@@ -14714,6 +14725,108 @@
       setInterval(fixMobileMenu, 50);
     })();
   </script>
+<template id="ag-blog-template">
+  <section class="ag-section-blog" data-framer-name="Section Blog">
+    <div class="ag-blog-heading-wrap" style="width: 100%; display: flex; justify-content: flex-start; margin-bottom: 48px;">
+      <div class="framer-1r5gbnq" data-framer-component-type="RichTextContainer">
+        <h2 class="framer-text framer-styles-preset-i9tly3" data-styles-preset="BZZ_AYR5d"
+            style="--framer-text-alignment: left; text-align: left;">Blog</h2>
+      </div>
+    </div>
+
+    <!-- ── Grid de 4 tarjetas ── -->
+    <div class="ag-blog-grid">
+      <!-- Tarjeta 1 -->
+      <div class="ag-blog-card">
+        <a href="news/tips-and-tricks-for-creating-a-strong-brand-identity.html" class="ag-blog-card__img-link">
+          <img src="https://framerusercontent.com/images/YRxqmgIvuY1RZ2tJanTEkczQ.webp"
+               alt="TIPS AND TRICKS FOR CREATING A STRONG BRAND IDENTITY"
+               loading="lazy">
+        </a>
+        <div class="ag-blog-card__body">
+          <h3 class="ag-blog-card__title">Tips and Tricks for Creating a Strong Brand Identity</h3>
+          <p class="ag-blog-card__desc">Craft a memorable, consistent, and strategic brand that truly connects.</p>
+          <a href="news/tips-and-tricks-for-creating-a-strong-brand-identity.html" class="ag-blog-card__cta">
+            <div class="ag-blog-card__cta-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+            <span>READ MORE</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <div class="ag-blog-card">
+        <a href="news/what-you-need-to-know-to-stay-ahead-of-the-curve.html" class="ag-blog-card__img-link">
+          <img src="https://framerusercontent.com/images/EKXBhGYRH8P0H9JUMBlQwmOFJg.webp"
+               alt="WHAT YOU NEED TO KNOW TO STAY AHEAD OF THE CURVE"
+               loading="lazy">
+        </a>
+        <div class="ag-blog-card__body">
+          <h3 class="ag-blog-card__title">What You Need to Know to Stay Ahead of the Curve</h3>
+          <p class="ag-blog-card__desc">Adapt, innovate, and understand your audience to stay competitive today.</p>
+          <a href="news/what-you-need-to-know-to-stay-ahead-of-the-curve.html" class="ag-blog-card__cta">
+            <div class="ag-blog-card__cta-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+            <span>READ MORE</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="ag-blog-card">
+        <a href="news/automatizaciones-strategies-for-success.html" class="ag-blog-card__img-link">
+          <img src="https://framerusercontent.com/images/yr99IuMHunFu0m4grKvpcLR6As.webp"
+               alt="AUTOMATIZACIONES STRATEGIES FOR SUCCESS"
+               loading="lazy">
+        </a>
+        <div class="ag-blog-card__body">
+          <h3 class="ag-blog-card__title">Automatizaciones Strategies for Success</h3>
+          <p class="ag-blog-card__desc">Boost conversions with smart UX, personalization, and data-driven decisions.</p>
+          <a href="news/automatizaciones-strategies-for-success.html" class="ag-blog-card__cta">
+            <div class="ag-blog-card__cta-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+            <span>READ MORE</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 4 -->
+      <div class="ag-blog-card">
+        <a href="news/best-practices-for-captivating-your-audience.html" class="ag-blog-card__img-link">
+          <img src="https://framerusercontent.com/images/fkLWdClmU4XoENttjL9lvfA5j60.webp"
+               alt="BEST PRACTICES FOR CAPTIVATING YOUR AUDIENCE"
+               loading="lazy">
+        </a>
+        <div class="ag-blog-card__body">
+          <h3 class="ag-blog-card__title">Best Practices for Captivating Your Audience</h3>
+          <p class="ag-blog-card__desc">Engage deeply by understanding, valuing, and evolving with your audience.</p>
+          <a href="news/best-practices-for-captivating-your-audience.html" class="ag-blog-card__cta">
+            <div class="ag-blog-card__cta-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+            <span>READ MORE</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
 </body>
 
 <!-- Mirrored from erikk-template.framer.website/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Jun 2026 18:29:15 GMT -->
