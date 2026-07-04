@@ -29,6 +29,16 @@
         changed = true;
       }
 
+      // The ancestor svg's CSS (.framer-118l9ke etc.) sets white-space:pre,
+      // forcing single-line text. At the forced clamp() font-size, "Marketing
+      // Digital" is wider than its actual container, and since everything in
+      // this svg/foreignObject chain is overflow:visible, the overflow just
+      // paints past the box to the right instead of wrapping. Allow wrap.
+      if (h.style.getPropertyValue('white-space') !== 'normal') {
+        h.style.setProperty('white-space', 'normal', 'important');
+        changed = true;
+      }
+
       // Framer wraps each heading in <svg viewBox="0 0 W H"><foreignObject>...
       // svg has width:100%/height:auto, so rendered height derives from the
       // viewBox aspect ratio. Forcing a different font-size makes the real
