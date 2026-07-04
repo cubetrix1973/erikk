@@ -1,0 +1,1 @@
+Los cambios de estilos en páginas Framer NUNCA se hacen en el HTML directamente. Siempre usar archivos override JS con MutationObserver (ver footer-override.js y services-override.js como referencia). Hacer commit después de cada cambio sin excepción.
