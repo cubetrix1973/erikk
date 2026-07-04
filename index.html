@@ -3957,7 +3957,7 @@
       --framer-font-family-bold-italic: "General Sans", "General Sans Placeholder", sans-serif;
       --framer-font-family-italic: "General Sans", "General Sans Placeholder", sans-serif;
       --framer-font-open-type-features: normal;
-      --framer-font-size: 96px;
+      --framer-font-size: 140px;
       --framer-font-style: normal;
       --framer-font-style-bold: normal;
       --framer-font-style-bold-italic: italic;
@@ -3987,7 +3987,7 @@
         --framer-font-family-bold-italic: "General Sans", "General Sans Placeholder", sans-serif;
         --framer-font-family-italic: "General Sans", "General Sans Placeholder", sans-serif;
         --framer-font-open-type-features: normal;
-        --framer-font-size: 80px;
+        --framer-font-size: 115px;
         --framer-font-style: normal;
         --framer-font-style-bold: normal;
         --framer-font-style-bold-italic: italic;
@@ -4018,7 +4018,7 @@
         --framer-font-family-bold-italic: "General Sans", "General Sans Placeholder", sans-serif;
         --framer-font-family-italic: "General Sans", "General Sans Placeholder", sans-serif;
         --framer-font-open-type-features: normal;
-        --framer-font-size: 64px;
+        --framer-font-size: 92px;
         --framer-font-style: normal;
         --framer-font-style-bold: normal;
         --framer-font-style-bold-italic: italic;
@@ -4049,7 +4049,7 @@
         --framer-font-family-bold-italic: "General Sans", "General Sans Placeholder", sans-serif;
         --framer-font-family-italic: "General Sans", "General Sans Placeholder", sans-serif;
         --framer-font-open-type-features: normal;
-        --framer-font-size: 48px;
+        --framer-font-size: 54px;
         --framer-font-style: normal;
         --framer-font-style-bold: normal;
         --framer-font-style-bold-italic: italic;
@@ -4565,7 +4565,7 @@
 
       .framer-3ec57 .framer-1c4pg6c {
         align-self: unset;
-        gap: 32px
+        gap: 8px
       }
 
       .framer-3ec57 .framer-1r5gbnq,
@@ -7245,8 +7245,8 @@
     .framer-4ZWoU .framer-mgrps-container::after {
       content: '';
       display: block;
-      width: 140px;
-      height: 35px;
+      width: 100px !important;
+      height: 25px !important;
       background-image: url('/logo-unders.svg');
       background-size: contain;
       background-repeat: no-repeat;
@@ -7300,6 +7300,11 @@
         transform: none !important;
       }
     }
+
+    /* Quitar toggle de modo claro/oscuro del navbar */
+    .framer-191hm2j-container {
+      display: none !important;
+    }
   </style>
   <style id="unders-lift-fix">
     @media (max-width: 809px) {
@@ -7334,12 +7339,19 @@
 </style>
 
 <style id="antigravity-custom-overrides">
-    /* Forzar logo U_NDERS */
-    .framer-4ZWoU {
-      content: url("logo-unders.svg") !important;
-      width: 55px !important;
-      height: auto !important;
-      display: inline-block !important;
+    /* Bajar tamaño de "Soluciones con inteligencia" y "Te acercamos el
+       futuro" en tablet y móvil (en desktop se dejan igual) */
+    @media (max-width: 1199px) and (min-width: 810px) {
+      .framer-b5gnf5 h2.framer-text,
+      .framer-s8g1yi h2.framer-text {
+        --framer-font-size: 36px !important;
+      }
+    }
+    @media (max-width: 809px) {
+      .framer-b5gnf5 h2.framer-text,
+      .framer-s8g1yi h2.framer-text {
+        --framer-font-size: 30px !important;
+      }
     }
 
     /* Forzar hero heading en espanol */
@@ -7348,7 +7360,7 @@
       line-height: 0 !important;
     }
     .framer-ru4c8b p::before {
-      content: "EL PRINCIPIO DE UNA HISTORIA QUE NO TIENE FIN" !important;
+      content: "" !important;
       font-size: var(--framer-font-size) !important;
       line-height: var(--framer-line-height) !important;
       display: block !important;
@@ -7356,6 +7368,11 @@
 
     /* Ocultar contadores */
     .framer-1ddh8vd {
+      display: none !important;
+    }
+
+    /* Ocultar "Agencia de Marketing digital" y "Málaga" del hero */
+    .framer-4nn0xy {
       display: none !important;
     }
   
@@ -7376,7 +7393,7 @@
 (function() {
   'use strict';
 
-  var HERO_TEXT   = 'EL PRINCIPIO DE UNA HISTORIA QUE NO TIENE FIN';
+  var HERO_TEXT   = '';
   var LOGO_SRC    = 'logo-unders.svg';
   var THEME_ATTR  = 'framestack-theme';   // Framer's theme attribute
 
@@ -7390,23 +7407,6 @@
   function applyOverrides() {
     console.log('applyOverrides running...');
     var changed = false;
-
-    // 1) LOGO
-    var logo = document.querySelector('.framer-4ZWoU');
-    if (logo) {
-      var img = logo.querySelector('img.ag-logo');
-      if (!img) {
-        // Ocultar cualquier texto/span interno
-        logo.style.setProperty('font-size', '0', 'important');
-        logo.style.setProperty('color', 'transparent', 'important');
-        var imgEl = document.createElement('img');
-        imgEl.src = LOGO_SRC;
-        imgEl.className = 'ag-logo';
-        imgEl.style.cssText = 'width:55px;height:auto;display:block;';
-        logo.prepend(imgEl);
-        changed = true;
-      }
-    }
 
     // 2) HERO HEADING
     var heroWrap = document.querySelector('.framer-ru4c8b');
@@ -7539,30 +7539,13 @@
 /* ═══════════════ BLOG SECTION ═══════════════ */
 .ag-section-blog {
   width: 100%;
-  margin-top: -64px !important;
+  margin-top: 48px !important;
   padding: 0 136px 80px;
-  background-color: #ffffff !important;
-  background: #ffffff !important;
+  background: var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, #fff);
 }
-.framer-h60dpj,
-main.framer-h60dpj {
-  background-color: #ffffff !important;
-  background: #ffffff !important;
-}
-[style*="position: sticky"],
-[style*="position:sticky"] {
-  will-change: transform !important;
-  transform: translateZ(0) !important;
-}
-footer,
-.framer-1hmgifw-container,
-.framer-s5vdhb-container {
-  will-change: transform !important;
-  transform: translateZ(0) !important;
-  box-shadow: none !important;
-}
-@media (max-width: 1279px) { .ag-section-blog { margin-top: -48px !important; padding: 0 80px 60px; } }
-@media (max-width: 809px)  { .ag-section-blog { margin-top: -32px !important; padding: 0 24px 48px; } }
+@media (max-width: 1279px) { .ag-section-blog { margin-top: 32px !important; padding: 0 80px 60px; } }
+@media (max-width: 809px)  { .ag-section-blog { margin-top: 16px !important; padding: 0 24px 48px; order: 8; } }
+@media (max-width: 809px)  { .ag-sticky-wrap { order: 8; } }
 
 /* Heading alignment */
 .ag-section-blog .framer-c24omt {
@@ -7639,9 +7622,11 @@ footer,
 
 /* Description */
 .ag-blog-card__desc {
-  font-family: "General Sans", "General Sans Placeholder", sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
+  font-family: "Roboto Mono", monospace;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 160%;
+  letter-spacing: 0px;
   color: var(--token-797a2fb4-2d14-46eb-9fb6-f38c1a9a545e, rgba(17, 17, 17, 0.5));
   margin: 0;
 }
@@ -7683,6 +7668,23 @@ footer,
 }
 </style>
 <style id="ag-hide-team">section.framer-zgmyri { display: none !important; }</style>
+<style id="ag-blog-title-fix">
+.ag-blog-card__title {
+  font-family: "General Sans", "General Sans Placeholder", sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px !important;
+  line-height: 140% !important;
+  text-transform: uppercase !important;
+}
+.ag-blog-card__desc {
+  font-family: "Roboto Mono", monospace !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 160% !important;
+  letter-spacing: 0px !important;
+}
+</style>
 </head>
 
 <body>
@@ -9208,8 +9210,7 @@ footer,
                     </div>
                   </div>
                   <div class="framer-zm9h0t" data-framer-component-type="RichTextContainer" style="transform:none">
-                    <h2 class="framer-text framer-styles-preset-x7yh8a" data-styles-preset="nY27961W8">Nuestros <br
-                        class="framer-text">servicios</h2>
+                    <h2 class="framer-text framer-styles-preset-x7yh8a" data-styles-preset="nY27961W8">Servicios</h2>
                   </div>
                 </div>
                 <div class="framer-1114f5k" data-framer-name="Grid"><!--$-->
@@ -9880,7 +9881,7 @@ footer,
                     style="will-change:transform;opacity:1;transform:translateY(200px)">
                     <foreignObject width="100%" height="100%" class="framer-fit-text" transform="scale(1)"
                       style="overflow:visible;transform-origin:center center">
-                      <p style="--font-selector:RlM7R2VuZXJhbCBTYW5zLXJlZ3VsYXI=;--framer-font-family:&quot;General Sans&quot;, &quot;General Sans Placeholder&quot;, sans-serif;--framer-font-size:66.72095613382798px;--framer-letter-spacing:0px;--framer-line-height:90%;--framer-text-color:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--framer-text-transform:uppercase"
+                      <p style="--font-selector:RlM7R2VuZXJhbCBTYW5zLXJlZ3VsYXI=;--framer-font-family:&quot;General Sans&quot;, &quot;General Sans Placeholder&quot;, sans-serif;--framer-font-size:50px;--framer-letter-spacing:0px;--framer-line-height:90%;--framer-text-color:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--framer-text-transform:uppercase"
                         class="framer-text">Selected</p>
                     </foreignObject>
                   </svg></div>
@@ -10470,20 +10471,19 @@ footer,
                         <div class="framer-1a6af1v" data-framer-name="2023"
                           data-framer-component-type="RichTextContainer"
                           style="--framer-paragraph-spacing:0px;transform:none">
-                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2025</p>
+                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2023</p>
                         </div>
                         <div class="framer-1hgcn76" data-framer-name="Grid">
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
-                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Fleuré
+                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Valvoline
                             </h3>
                           </div>
                           <div class="framer-14po022" data-framer-name="Marketing digital"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">Análisis
-                              de datos</p>
+                            <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">Automatización</p>
                           </div>
                         </div>
                       </div>
@@ -10497,20 +10497,19 @@ footer,
                         <div class="framer-1a6af1v" data-framer-name="2023"
                           data-framer-component-type="RichTextContainer"
                           style="--framer-paragraph-spacing:0px;transform:none">
-                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2025</p>
+                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2023</p>
                         </div>
                         <div class="framer-1hgcn76" data-framer-name="Grid">
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
-                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Fleuré
+                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Valvoline
                             </h3>
                           </div>
                           <div class="framer-14po022" data-framer-name="Marketing digital"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">Análisis
-                              de datos</p>
+                            <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">Automatización</p>
                           </div>
                         </div>
                       </div>
@@ -10524,20 +10523,19 @@ footer,
                         <div class="framer-1a6af1v" data-framer-name="2023"
                           data-framer-component-type="RichTextContainer"
                           style="--framer-paragraph-spacing:0px;transform:none">
-                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2025</p>
+                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2023</p>
                         </div>
                         <div class="framer-1hgcn76" data-framer-name="Grid">
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
-                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Fleuré
+                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Valvoline
                             </h3>
                           </div>
                           <div class="framer-14po022" data-framer-name="Marketing digital"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
-                            <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">Análisis
-                              de datos</p>
+                            <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">Automatización</p>
                           </div>
                         </div>
                       </div>
@@ -10588,13 +10586,13 @@ footer,
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
                             <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">
-                              Northland</h3>
+                              Meliá</h3>
                           </div>
                           <div class="framer-14po022" data-framer-name="Marketing digital"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
                             <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                              Automatizaciones</p>
+                              Diseño de App's</p>
                           </div>
                         </div>
                       </div>
@@ -10615,13 +10613,13 @@ footer,
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
                             <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">
-                              Northland</h3>
+                              Meliá</h3>
                           </div>
                           <div class="framer-14po022" data-framer-name="Marketing digital"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
                             <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                              Automatizaciones</p>
+                              Diseño de App's</p>
                           </div>
                         </div>
                       </div>
@@ -10642,13 +10640,13 @@ footer,
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
                             <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">
-                              Northland</h3>
+                              Meliá</h3>
                           </div>
                           <div class="framer-14po022" data-framer-name="Marketing digital"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
                             <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">
-                              Automatizaciones</p>
+                              Diseño de App's</p>
                           </div>
                         </div>
                       </div>
@@ -10698,7 +10696,7 @@ footer,
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
-                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Véloce
+                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Nido
                             </h3>
                           </div>
                           <div class="framer-14po022" data-framer-name="Marketing digital"
@@ -10725,7 +10723,7 @@ footer,
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
-                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Véloce
+                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Nido
                             </h3>
                           </div>
                           <div class="framer-14po022" data-framer-name="Marketing digital"
@@ -10752,7 +10750,7 @@ footer,
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
                             data-framer-component-type="RichTextContainer"
                             style="--framer-paragraph-spacing:0px;transform:none">
-                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Véloce
+                            <h3 class="framer-text framer-styles-preset-12lj5ox" data-styles-preset="YckFIlg3V">Nido
                             </h3>
                           </div>
                           <div class="framer-14po022" data-framer-name="Marketing digital"
@@ -10803,7 +10801,7 @@ footer,
                         <div class="framer-1a6af1v" data-framer-name="2023"
                           data-framer-component-type="RichTextContainer"
                           style="--framer-paragraph-spacing:0px;transform:none">
-                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2023</p>
+                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2024</p>
                         </div>
                         <div class="framer-1hgcn76" data-framer-name="Grid">
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
@@ -10830,7 +10828,7 @@ footer,
                         <div class="framer-1a6af1v" data-framer-name="2023"
                           data-framer-component-type="RichTextContainer"
                           style="--framer-paragraph-spacing:0px;transform:none">
-                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2023</p>
+                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2024</p>
                         </div>
                         <div class="framer-1hgcn76" data-framer-name="Grid">
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
@@ -10857,7 +10855,7 @@ footer,
                         <div class="framer-1a6af1v" data-framer-name="2023"
                           data-framer-component-type="RichTextContainer"
                           style="--framer-paragraph-spacing:0px;transform:none">
-                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2023</p>
+                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2024</p>
                         </div>
                         <div class="framer-1hgcn76" data-framer-name="Grid">
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
@@ -10914,7 +10912,7 @@ footer,
                         <div class="framer-1a6af1v" data-framer-name="2023"
                           data-framer-component-type="RichTextContainer"
                           style="--framer-paragraph-spacing:0px;transform:none">
-                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2023</p>
+                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2026</p>
                         </div>
                         <div class="framer-1hgcn76" data-framer-name="Grid">
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
@@ -10941,7 +10939,7 @@ footer,
                         <div class="framer-1a6af1v" data-framer-name="2023"
                           data-framer-component-type="RichTextContainer"
                           style="--framer-paragraph-spacing:0px;transform:none">
-                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2023</p>
+                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2026</p>
                         </div>
                         <div class="framer-1hgcn76" data-framer-name="Grid">
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
@@ -10968,7 +10966,7 @@ footer,
                         <div class="framer-1a6af1v" data-framer-name="2023"
                           data-framer-component-type="RichTextContainer"
                           style="--framer-paragraph-spacing:0px;transform:none">
-                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2023</p>
+                          <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns">2026</p>
                         </div>
                         <div class="framer-1hgcn76" data-framer-name="Grid">
                           <div class="framer-1j0fu3r" data-framer-name="Oceania"
@@ -11013,7 +11011,7 @@ footer,
                       style="--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));--framer-paragraph-spacing:0px;transform:none">
                       <p class="framer-text framer-styles-preset-3nqyhf" data-styles-preset="YAP816Y5n"
                         style="--framer-text-alignment:center;--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                        Unleashing the Potential of Your Brand</p>
+                        Soluciones con inteligencia</p>
                     </div><!--$-->
                     <div class="framer-5zl7o6-container"><!--$--><a
                         class="framer-XS757 framer-CpT9e framer-1twnrr8 framer-v-1i395v5 framer-w44gnw"
@@ -11064,7 +11062,7 @@ footer,
                       style="--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));--framer-paragraph-spacing:0px;transform:none">
                       <p class="framer-text framer-styles-preset-1wml6uu" data-styles-preset="fVxnimdqP"
                         style="--framer-text-alignment:center;--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                        Unleashing the Potential of Your Brand</p>
+                        Soluciones con inteligencia</p>
                     </div><!--$-->
                     <div class="framer-5zl7o6-container"><!--$--><a
                         class="framer-XS757 framer-CpT9e framer-1twnrr8 framer-v-1i395v5 framer-w44gnw"
@@ -11115,7 +11113,7 @@ footer,
                       style="--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));--framer-paragraph-spacing:0px;transform:none">
                       <p class="framer-text framer-styles-preset-3nqyhf" data-styles-preset="YAP816Y5n"
                         style="--framer-text-alignment:center;--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                        Unleashing the Potential of Your Brand</p>
+                        Soluciones con inteligencia</p>
                     </div><!--$-->
                     <div class="framer-5zl7o6-container"><!--$--><a
                         class="framer-XS757 framer-CpT9e framer-1twnrr8 framer-v-1i395v5 framer-w44gnw"
@@ -11214,83 +11212,7 @@ footer,
                           </div><!--/$-->
                         </div>
                       </a><!--/$--></div><!--/$-->
-                    <div class="framer-1p99har" data-framer-name="Socials">
-                      <div class="framer-9sv2uy-container"><!--$--><a
-                          class="framer-mv4QJ framer-hFLAS framer-9pkin1 framer-v-1gpbr6 framer-su7mb0"
-                          data-framer-name="Inverse"
-                          href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola" target="_blank"
-                          rel="noopener">
-                          <div class="framer-fy8y5d" data-framer-name="Badge"
-                            style="background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px;transform:none">
-                            <svg class="framer-QYJ03 framer-lpvnex" role="presentation" viewBox="0 0 24 24"
-                              style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5">
-                              <use href="#1403532491" />
-                            </svg></div>
-                          <div class="framer-drtsty" data-framer-name="Inner">
-                            <div class="framer-10ygo0u" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Framer</p>
-                            </div>
-                            <div class="framer-10xmyo9" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Framer</p>
-                            </div>
-                          </div>
-                        </a><!--/$--></div>
-                      <div class="framer-8yd15o-container"><!--$--><a
-                          class="framer-mv4QJ framer-hFLAS framer-9pkin1 framer-v-1gpbr6 framer-su7mb0"
-                          data-framer-name="Inverse" href="https://x.com/gola99" target="_blank" rel="noopener">
-                          <div class="framer-fy8y5d" data-framer-name="Badge"
-                            style="background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px;transform:none">
-                            <svg class="framer-QMsyA framer-lpvnex" role="presentation" viewBox="0 0 24 24"
-                              style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5">
-                              <use href="#1688045918" />
-                            </svg></div>
-                          <div class="framer-drtsty" data-framer-name="Inner">
-                            <div class="framer-10ygo0u" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Twitter</p>
-                            </div>
-                            <div class="framer-10xmyo9" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Twitter</p>
-                            </div>
-                          </div>
-                        </a><!--/$--></div>
-                      <div class="framer-11ksazt-container"><!--$--><a
-                          class="framer-mv4QJ framer-hFLAS framer-9pkin1 framer-v-1gpbr6 framer-su7mb0"
-                          data-framer-name="Inverse" href="https://www.instagram.com/gola.design/" target="_blank"
-                          rel="noopener">
-                          <div class="framer-fy8y5d" data-framer-name="Badge"
-                            style="background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px;transform:none">
-                            <svg class="framer-SHCqu framer-lpvnex" role="presentation" viewBox="0 0 24 24"
-                              style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5">
-                              <use href="#942143898" />
-                            </svg></div>
-                          <div class="framer-drtsty" data-framer-name="Inner">
-                            <div class="framer-10ygo0u" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Instagram</p>
-                            </div>
-                            <div class="framer-10xmyo9" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Instagram</p>
-                            </div>
-                          </div>
-                        </a><!--/$--></div>
-                    </div>
+                    
                   </div>
                   <div class="framer-kshall" data-framer-name="Right">
                     <div class="framer-19lxc5z" data-framer-name="Column">
@@ -11985,7 +11907,7 @@ footer,
                       <div class="framer-clc0py-container"><!--$--><a
                           class="framer-XS757 framer-CpT9e framer-1twnrr8 framer-v-1i395v5 framer-w44gnw"
                           data-border="true" data-framer-name="Primary Inverse - Arrow" data-highlight="true"
-                          href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola" target="_blank"
+                          href="contact.html" target="_blank"
                           rel="noopener" tabindex="0"
                           style="--border-bottom-width:0px;--border-color:var(--token-8e68fe2a-54ce-48bb-a229-0cfd0ff89ba2, rgb(17, 17, 17));--border-left-width:0px;--border-right-width:0px;--border-style:solid;--border-top-width:0px;background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px">
                           <div class="framer-2a5bmb" data-framer-name="Inner">
@@ -12018,9 +11940,7 @@ footer,
                       style="--extracted-r6o4lv:var(--token-d65913ad-f961-467c-89e1-937264b2cda0, rgba(255, 255, 255, 0.6));--framer-paragraph-spacing:0px;transform:none">
                       <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
                         style="--framer-text-color:var(--extracted-r6o4lv, var(--token-d65913ad-f961-467c-89e1-937264b2cda0, rgba(255, 255, 255, 0.6)))">
-                        © Made by <!--$--><a class="framer-text framer-styles-preset-hv5wha"
-                          data-styles-preset="GXEzV3S5C" href="https://gola.supply/" target="_blank" rel="noopener">Gola
-                          Templates</a><!--/$--></p>
+                        © erikk</p>
                     </div>
                   </div>
                   <div class="framer-1hnjnnf" data-framer-name="Right"><!--$-->
@@ -12165,83 +12085,7 @@ footer,
                           </div><!--/$-->
                         </div>
                       </a><!--/$--></div><!--/$-->
-                    <div class="framer-1p99har" data-framer-name="Socials">
-                      <div class="framer-9sv2uy-container"><!--$--><a
-                          class="framer-mv4QJ framer-hFLAS framer-9pkin1 framer-v-1gpbr6 framer-su7mb0"
-                          data-framer-name="Inverse"
-                          href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola" target="_blank"
-                          rel="noopener">
-                          <div class="framer-fy8y5d" data-framer-name="Badge"
-                            style="background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px;transform:none">
-                            <svg class="framer-QYJ03 framer-lpvnex" role="presentation" viewBox="0 0 24 24"
-                              style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5">
-                              <use href="#1403532491" />
-                            </svg></div>
-                          <div class="framer-drtsty" data-framer-name="Inner">
-                            <div class="framer-10ygo0u" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Framer</p>
-                            </div>
-                            <div class="framer-10xmyo9" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Framer</p>
-                            </div>
-                          </div>
-                        </a><!--/$--></div>
-                      <div class="framer-8yd15o-container"><!--$--><a
-                          class="framer-mv4QJ framer-hFLAS framer-9pkin1 framer-v-1gpbr6 framer-su7mb0"
-                          data-framer-name="Inverse" href="https://x.com/gola99" target="_blank" rel="noopener">
-                          <div class="framer-fy8y5d" data-framer-name="Badge"
-                            style="background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px;transform:none">
-                            <svg class="framer-QMsyA framer-lpvnex" role="presentation" viewBox="0 0 24 24"
-                              style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5">
-                              <use href="#1688045918" />
-                            </svg></div>
-                          <div class="framer-drtsty" data-framer-name="Inner">
-                            <div class="framer-10ygo0u" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Twitter</p>
-                            </div>
-                            <div class="framer-10xmyo9" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Twitter</p>
-                            </div>
-                          </div>
-                        </a><!--/$--></div>
-                      <div class="framer-11ksazt-container"><!--$--><a
-                          class="framer-mv4QJ framer-hFLAS framer-9pkin1 framer-v-1gpbr6 framer-su7mb0"
-                          data-framer-name="Inverse" href="https://www.instagram.com/gola.design/" target="_blank"
-                          rel="noopener">
-                          <div class="framer-fy8y5d" data-framer-name="Badge"
-                            style="background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px;transform:none">
-                            <svg class="framer-SHCqu framer-lpvnex" role="presentation" viewBox="0 0 24 24"
-                              style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5">
-                              <use href="#942143898" />
-                            </svg></div>
-                          <div class="framer-drtsty" data-framer-name="Inner">
-                            <div class="framer-10ygo0u" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Instagram</p>
-                            </div>
-                            <div class="framer-10xmyo9" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Instagram</p>
-                            </div>
-                          </div>
-                        </a><!--/$--></div>
-                    </div>
+                    
                   </div>
                   <div class="framer-kshall" data-framer-name="Right">
                     <div class="framer-19lxc5z" data-framer-name="Column">
@@ -12936,7 +12780,7 @@ footer,
                       <div class="framer-clc0py-container"><!--$--><a
                           class="framer-XS757 framer-CpT9e framer-1twnrr8 framer-v-1i395v5 framer-w44gnw"
                           data-border="true" data-framer-name="Primary Inverse - Arrow" data-highlight="true"
-                          href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola" target="_blank"
+                          href="contact.html" target="_blank"
                           rel="noopener" tabindex="0"
                           style="--border-bottom-width:0px;--border-color:var(--token-8e68fe2a-54ce-48bb-a229-0cfd0ff89ba2, rgb(17, 17, 17));--border-left-width:0px;--border-right-width:0px;--border-style:solid;--border-top-width:0px;background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px">
                           <div class="framer-2a5bmb" data-framer-name="Inner">
@@ -12969,9 +12813,7 @@ footer,
                       style="--extracted-r6o4lv:var(--token-d65913ad-f961-467c-89e1-937264b2cda0, rgba(255, 255, 255, 0.6));--framer-paragraph-spacing:0px;transform:none">
                       <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
                         style="--framer-text-color:var(--extracted-r6o4lv, var(--token-d65913ad-f961-467c-89e1-937264b2cda0, rgba(255, 255, 255, 0.6)))">
-                        © Made by <!--$--><a class="framer-text framer-styles-preset-hv5wha"
-                          data-styles-preset="GXEzV3S5C" href="https://gola.supply/" target="_blank" rel="noopener">Gola
-                          Templates</a><!--/$--></p>
+                        © erikk</p>
                     </div>
                   </div>
                   <div class="framer-1hnjnnf" data-framer-name="Right"><!--$-->
@@ -13116,83 +12958,7 @@ footer,
                           </div><!--/$-->
                         </div>
                       </a><!--/$--></div><!--/$-->
-                    <div class="framer-1p99har" data-framer-name="Socials">
-                      <div class="framer-9sv2uy-container"><!--$--><a
-                          class="framer-mv4QJ framer-hFLAS framer-9pkin1 framer-v-1gpbr6 framer-su7mb0"
-                          data-framer-name="Inverse"
-                          href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola" target="_blank"
-                          rel="noopener">
-                          <div class="framer-fy8y5d" data-framer-name="Badge"
-                            style="background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px;transform:none">
-                            <svg class="framer-QYJ03 framer-lpvnex" role="presentation" viewBox="0 0 24 24"
-                              style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5">
-                              <use href="#1403532491" />
-                            </svg></div>
-                          <div class="framer-drtsty" data-framer-name="Inner">
-                            <div class="framer-10ygo0u" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Framer</p>
-                            </div>
-                            <div class="framer-10xmyo9" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Framer</p>
-                            </div>
-                          </div>
-                        </a><!--/$--></div>
-                      <div class="framer-8yd15o-container"><!--$--><a
-                          class="framer-mv4QJ framer-hFLAS framer-9pkin1 framer-v-1gpbr6 framer-su7mb0"
-                          data-framer-name="Inverse" href="https://x.com/gola99" target="_blank" rel="noopener">
-                          <div class="framer-fy8y5d" data-framer-name="Badge"
-                            style="background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px;transform:none">
-                            <svg class="framer-QMsyA framer-lpvnex" role="presentation" viewBox="0 0 24 24"
-                              style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5">
-                              <use href="#1688045918" />
-                            </svg></div>
-                          <div class="framer-drtsty" data-framer-name="Inner">
-                            <div class="framer-10ygo0u" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Twitter</p>
-                            </div>
-                            <div class="framer-10xmyo9" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Twitter</p>
-                            </div>
-                          </div>
-                        </a><!--/$--></div>
-                      <div class="framer-11ksazt-container"><!--$--><a
-                          class="framer-mv4QJ framer-hFLAS framer-9pkin1 framer-v-1gpbr6 framer-su7mb0"
-                          data-framer-name="Inverse" href="https://www.instagram.com/gola.design/" target="_blank"
-                          rel="noopener">
-                          <div class="framer-fy8y5d" data-framer-name="Badge"
-                            style="background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px;transform:none">
-                            <svg class="framer-SHCqu framer-lpvnex" role="presentation" viewBox="0 0 24 24"
-                              style="--1m6trwb:0;--21h8s6:var(--token-c5c4fdcb-9482-48bb-aedf-353188472aae, rgb(17, 17, 17));--pgex8v:1.5">
-                              <use href="#942143898" />
-                            </svg></div>
-                          <div class="framer-drtsty" data-framer-name="Inner">
-                            <div class="framer-10ygo0u" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Instagram</p>
-                            </div>
-                            <div class="framer-10xmyo9" data-framer-component-type="RichTextContainer"
-                              style="--framer-paragraph-spacing:0px;--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-                              <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
-                                style="--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)))">
-                                Instagram</p>
-                            </div>
-                          </div>
-                        </a><!--/$--></div>
-                    </div>
+                    
                   </div>
                   <div class="framer-kshall" data-framer-name="Right">
                     <div class="framer-19lxc5z" data-framer-name="Column">
@@ -13887,7 +13653,7 @@ footer,
                       <div class="framer-clc0py-container"><!--$--><a
                           class="framer-XS757 framer-CpT9e framer-1twnrr8 framer-v-1i395v5 framer-w44gnw"
                           data-border="true" data-framer-name="Primary Inverse - Arrow" data-highlight="true"
-                          href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola" target="_blank"
+                          href="contact.html" target="_blank"
                           rel="noopener" tabindex="0"
                           style="--border-bottom-width:0px;--border-color:var(--token-8e68fe2a-54ce-48bb-a229-0cfd0ff89ba2, rgb(17, 17, 17));--border-left-width:0px;--border-right-width:0px;--border-style:solid;--border-top-width:0px;background-color:var(--token-4321a524-8651-4268-85f9-e884d8cb6223, rgb(255, 255, 255));border-bottom-left-radius:500px;border-bottom-right-radius:500px;border-top-left-radius:500px;border-top-right-radius:500px">
                           <div class="framer-2a5bmb" data-framer-name="Inner">
@@ -13920,9 +13686,7 @@ footer,
                       style="--extracted-r6o4lv:var(--token-d65913ad-f961-467c-89e1-937264b2cda0, rgba(255, 255, 255, 0.6));--framer-paragraph-spacing:0px;transform:none">
                       <p class="framer-text framer-styles-preset-1ozn31c" data-styles-preset="ssacYf4ns"
                         style="--framer-text-color:var(--extracted-r6o4lv, var(--token-d65913ad-f961-467c-89e1-937264b2cda0, rgba(255, 255, 255, 0.6)))">
-                        © Made by <!--$--><a class="framer-text framer-styles-preset-hv5wha"
-                          data-styles-preset="GXEzV3S5C" href="https://gola.supply/" target="_blank" rel="noopener">Gola
-                          Templates</a><!--/$--></p>
+                        © erikk</p>
                     </div>
                   </div>
                   <div class="framer-1hnjnnf" data-framer-name="Right"><!--$-->
@@ -14006,28 +13770,7 @@ footer,
       </div>
       <div id="overlay"></div>
       <div class="framer-15ro88r"></div>
-      <div class="framer-n4vz6i-container">
-        <div class="framer-rkOxJ framer-o04pbs framer-v-o04pbs" data-framer-name="Desktop"><!--$--><a
-            class="framer-yiz5cx framer-xs5h87" data-framer-appear-id="yiz5cx" data-framer-name="Badge"
-            href="https://www.framer.com/marketplace/templates/erikk/?via=pawelgola" target="_blank" rel="noopener"
-            style="background-color:var(--token-dca875b7-f855-43c1-bf73-97596e452266, rgb(17, 17, 17));will-change:transform;border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-top-left-radius:10px;border-top-right-radius:10px;box-shadow:0px 1px 2px 0px rgba(0, 0, 0, 0.25);opacity:0.001;transform:translateY(10px)">
-            <div class="framer-1iafdi9" data-framer-component-type="RichTextContainer"
-              style="--extracted-r6o4lv:var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255));transform:none">
-              <p class="framer-text"
-                style="--font-selector:SW50ZXItU2VtaUJvbGQ=;--framer-font-size:13px;--framer-font-weight:600;--framer-letter-spacing:0px;--framer-line-height:100%;--framer-text-color:var(--extracted-r6o4lv, var(--token-c5446a54-80de-4f79-b24b-55997bf1fe5e, rgb(255, 255, 255)));--framer-text-transform:inherit">
-                Buy Template $79</p>
-            </div>
-          </a><!--/$--><!--$--><a class="framer-23ladc framer-xs5h87" data-framer-appear-id="23ladc"
-            data-framer-name="Badge" href="https://www.framer.com/marketplace/creator/pawel-gola?via=pawelgola"
-            target="_blank" rel="noopener"
-            style="background-color:rgb(255, 255, 255);will-change:transform;border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-top-left-radius:10px;border-top-right-radius:10px;box-shadow:0px 1px 2px 0px rgba(0, 0, 0, 0.25);opacity:0.001;transform:translateY(10px)">
-            <div class="framer-1gxbnv4" data-framer-component-type="RichTextContainer" style="transform:none">
-              <p class="framer-text"
-                style="--font-selector:SW50ZXItU2VtaUJvbGQ=;--framer-font-size:13px;--framer-font-weight:600;--framer-letter-spacing:0px;--framer-line-height:100%;--framer-text-transform:inherit">
-                More Templates</p>
-            </div>
-          </a><!--/$--></div>
-      </div>
+      
     </div>
     <div id="template-overlay"></div><!--/$-->
   </div>
@@ -14237,6 +13980,17 @@ footer,
   <script>
     (function () {
       function replaceText(element) {
+    if (element.tagName === "A") {
+      var __href = element.getAttribute("href") || "";
+      if (/framer\.com\/marketplace\/creator\/pawel-gola|x\.com\/gola99|instagram\.com\/gola\.design|gola\.supply|framer\.com\/marketplace\/templates\/erikk/i.test(__href)) {
+        if (element.getAttribute("data-framer-name") === "Primary Inverse - Arrow") {
+          element.setAttribute("href", "contact.html");
+        } else {
+          element.remove();
+          return;
+        }
+      }
+    }
         if (element.nodeType === 1) {
           // Reemplazo de menús "Rolling Text" de Framer
           var isRollingText = false;
@@ -14286,7 +14040,14 @@ footer,
             }
 
             // Reemplazo de la descripción secundaria
-            if (/We\s+believe\s+that\s+every\s+brand\s+has\s+a\s+unique\s+story/i.test(element.nodeValue)) {
+            // Reemplazo del credito "Made by Gola Templates"
+        if (/.{0,5}Made\s+by/i.test(element.nodeValue)) {
+          element.nodeValue = "© erikk";
+        }
+        if (element.nodeValue.trim() === "Gola Templates" || element.nodeValue.trim() === "Gola") {
+          element.nodeValue = "";
+        }
+        if (/We\s+believe\s+that\s+every\s+brand\s+has\s+a\s+unique\s+story/i.test(element.nodeValue)) {
               element.nodeValue = "Desarrollamos soluciones digitales a medida combinando analítica predictiva, automatización avanzada y estrategias creativas de alto impacto para optimizar tus procesos y diseñar con éxito el futuro de tu marca.";
             }
 
@@ -14310,29 +14071,37 @@ footer,
               element.nodeValue = element.nodeValue.replace(/TAILORED\s+BRAND\s+SOLUTIONS/gi, 'TE ACERCAMOS EL FUTURO');
             }
 
-            // Reemplazo de Our Services (separado por text nodes)
+            // Reemplazo de Our Services (separado por text nodes) -> solo "Servicios"
             if (element.nodeValue.trim() === "Our") {
-              element.nodeValue = "Nuestros";
+              element.nodeValue = "";
             }
             if (element.nodeValue.trim() === "Services") {
-              element.nodeValue = "servicios";
+              element.nodeValue = "Servicios";
             }
             if (element.nodeValue.trim() === "OUR") {
-              element.nodeValue = "NUESTROS";
+              element.nodeValue = "";
             }
             if (element.nodeValue.trim() === "SERVICES") {
               element.nodeValue = "SERVICIOS";
             }
             if (/Our\s+Services/i.test(element.nodeValue)) {
-              element.nodeValue = element.nodeValue.replace(/Our\s+Services/gi, 'Nuestros servicios');
+              element.nodeValue = element.nodeValue.replace(/Our\s+Services/gi, 'Servicios');
             }
             if (/OUR\s+SERVICES/i.test(element.nodeValue)) {
-              element.nodeValue = element.nodeValue.replace(/OUR\s+SERVICES/gi, 'NUESTROS SERVICIOS');
+              element.nodeValue = element.nodeValue.replace(/OUR\s+SERVICES/gi, 'SERVICIOS');
             }
 
             // Reemplazo de Selected Work
             if (element.nodeValue.trim() === "Selected") {
               element.nodeValue = "Proyectos";
+              // Este heading es un "Fit Text" de Framer: el tamaño estaba calculado
+              // para que "Selected" (8 letras) llenara justo su caja; "Proyectos"
+              // (9 letras) no cabe a ese tamaño y se corta. React vuelve a fijar su
+              // font-size original en cada hidratación, así que hay que forzarlo
+              // aquí mismo, cada vez que se traduce el texto, no solo una vez en el HTML.
+              if (element.parentNode) {
+                element.parentNode.style.setProperty('--framer-font-size', '46px', 'important');
+              }
             }
             if (element.nodeValue.trim() === "Work") {
               var parentLink = element.parentNode;
@@ -14384,6 +14153,26 @@ footer,
             }
             if (/SELECTED\s+WORK/i.test(element.nodeValue)) {
               element.nodeValue = element.nodeValue.replace(/SELECTED\s+WORK/gi, 'PROYECTOS');
+            }
+
+            // Reemplazo de Clients -> Clientes, mismo tamaño que el titular "Servicios".
+            // OJO: reemplazar el innerHTML del SVG "Fit Text" (intento anterior) rompía
+            // la animación de aparición (opacity:0->1) de la lista de clientes vecina,
+            // porque React gestiona ese mismo árbol y se descuadra si le tocamos el DOM
+            // por dentro. Nos limitamos a poner el --framer-font-size con !important,
+            // sin tocar la estructura, usando window.innerWidth (fiable, ya usado en
+            // todo el sitio) en vez de subir por los ancestros para saber el breakpoint.
+            if (element.nodeValue.trim() === "Clients") {
+              element.nodeValue = "Clientes";
+              var clientsHeading = element.parentNode;
+              if (clientsHeading) {
+                var clientsSize = window.innerWidth <= 809 ? '38px'
+                  : window.innerWidth <= 1279 ? '92px' : '140px';
+                clientsHeading.style.setProperty('--framer-font-size', clientsSize, 'important');
+              }
+            }
+            if (element.nodeValue.trim() === "CLIENTS") {
+              element.nodeValue = "CLIENTES";
             }
 
             // Reemplazo de Fashionwerk (Logo/Titular principal)
@@ -14511,9 +14300,51 @@ footer,
               element.nodeValue = element.nodeValue.replace(/DISCOVER/gi, '+ info');
             }
 
+            // Reemplazo seguro de Véloce -> Nido (Solo dinámico para evitar romper la hidratación de React)
+            if (element.nodeValue.trim() === "Véloce") {
+              element.nodeValue = "Nido";
+            }
+
+            // Reemplazo seguro de Fleuré -> Valvoline (Solo dinámico para evitar romper la hidratación de React)
+            if (element.nodeValue.trim() === "Fleuré") {
+              element.nodeValue = "Valvoline";
+              // El año (2025) y la categoría (Análisis de datos) de esta
+              // fila también los resetea React en cada hidratación; los
+              // forzamos aquí mismo, cada vez.
+              var valvolineRow = element.parentNode && element.parentNode.closest('.framer-gnwH3');
+              var valvolineYearP = valvolineRow && valvolineRow.querySelector('.framer-1a6af1v p');
+              if (valvolineYearP && valvolineYearP.textContent.trim() !== '2023') {
+                valvolineYearP.textContent = '2023';
+              }
+              var valvolineCatP = valvolineRow && valvolineRow.querySelector('.framer-14po022 p');
+              if (valvolineCatP && valvolineCatP.textContent.trim() !== 'Automatización') {
+                valvolineCatP.textContent = 'Automatización';
+              }
+            }
+
+            // Reemplazo seguro de Northland -> Meliá (Solo dinámico para evitar romper la hidratación de React)
+            if (element.nodeValue.trim() === "Northland") {
+              element.nodeValue = "Meliá";
+              // La categoría de esta fila (Automatizaciones) también la
+              // resetea React en cada hidratación; la forzamos aquí mismo.
+              var meliaRow = element.parentNode && element.parentNode.closest('.framer-gnwH3');
+              var meliaCatP = meliaRow && meliaRow.querySelector('.framer-14po022 p');
+              if (meliaCatP && meliaCatP.textContent.trim() !== "Diseño de App's") {
+                meliaCatP.textContent = "Diseño de App's";
+              }
+            }
+
             // Reemplazo seguro de Azure -> Playa Padre (Solo dinámico para evitar romper la hidratación de React)
             if (element.nodeValue.trim() === "Azure") {
               element.nodeValue = "Playa Padre";
+              // El año de esta fila (2023) también lo resetea React en cada
+              // hidratación igual que el nombre; lo forzamos aquí mismo,
+              // cada vez, no solo una vez en el HTML estático.
+              var playaRow = element.parentNode && element.parentNode.closest('.framer-gnwH3');
+              var playaYearP = playaRow && playaRow.querySelector('.framer-1a6af1v p');
+              if (playaYearP && playaYearP.textContent.trim() !== '2024') {
+                playaYearP.textContent = '2024';
+              }
             }
             if (element.nodeValue.trim() === "AZURE") {
               element.nodeValue = "PLAYA PADRE";
@@ -14576,6 +14407,14 @@ footer,
             // Reemplazo seguro de Sage -> Frou Frou (Solo dinámico para evitar romper la hidratación de React)
             if (element.nodeValue.trim() === "Sage") {
               element.nodeValue = "Frou Frou";
+              // El año de esta fila (2023) también lo resetea React en cada
+              // hidratación igual que el nombre; lo forzamos aquí mismo,
+              // cada vez, no solo una vez en el HTML estático.
+              var frouRow = element.parentNode && element.parentNode.closest('.framer-gnwH3');
+              var frouYearP = frouRow && frouRow.querySelector('.framer-1a6af1v p');
+              if (frouYearP && frouYearP.textContent.trim() !== '2026') {
+                frouYearP.textContent = '2026';
+              }
             }
             if (element.nodeValue.trim() === "SAGE") {
               element.nodeValue = "FROU FROU";
@@ -14614,7 +14453,21 @@ footer,
         });
       });
 
-      observer.observe(document.documentElement, {
+      function purgeAuthorLinks() {
+    document.querySelectorAll("a[href]").forEach(function(a) {
+      var href = a.getAttribute("href") || "";
+      if (/framer\.com\/marketplace\/creator\/pawel-gola|x\.com\/gola99|instagram\.com\/gola\.design|gola\.supply|framer\.com\/marketplace\/templates\/erikk/i.test(href)) {
+        if (a.getAttribute("data-framer-name") === "Primary Inverse - Arrow") {
+          a.setAttribute("href", "contact.html");
+        } else {
+          a.remove();
+        }
+      }
+    });
+  }
+  setInterval(purgeAuthorLinks, 300);
+
+  observer.observe(document.documentElement, {
         childList: true,
         subtree: true,
         characterData: true
@@ -14827,6 +14680,12 @@ footer,
   </section>
 </template>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="/footer-override.js"></script>
+<script src="titles-unify.js"></script>
+<script src="text-reveal.js"></script>
+<script src="image-reveal.js"></script>
 </body>
 
 <!-- Mirrored from erikk-template.framer.website/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Jun 2026 18:29:15 GMT -->
