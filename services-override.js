@@ -88,6 +88,17 @@
         svg.style.setProperty('overflow', 'visible', 'important');
         changed = true;
       }
+
+      // El envoltorio "Headline" (div.framer-ufgxw1 / .framer-uops65 /
+      // .framer-1o8wztq) tiene overflow:hidden en su CSS. Con line-height:90%
+      // la tilde de la Ñ sobresale por ENCIMA del borde superior del <svg>, y
+      // ese recorte lo hace el PADRE, no el svg — por eso overflow:visible en
+      // el svg no bastaba. Liberar también el envoltorio.
+      var wrap = h.closest('[data-framer-name="Headline"]');
+      if (wrap && wrap.style.getPropertyValue('overflow') !== 'visible') {
+        wrap.style.setProperty('overflow', 'visible', 'important');
+        changed = true;
+      }
     });
 
     return changed;
