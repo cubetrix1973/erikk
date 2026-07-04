@@ -101,6 +101,48 @@
       }
     });
 
+    if (patchLabels()) changed = true;
+    return changed;
+  }
+
+  // ---- Labels verticales laterales ("DISEÑO WEB", etc.) --------------------
+  // Cada sección tiene un label rotado 90° dentro de una columna "Left" que es
+  // position:sticky top:32px. El header del sitio queda fijado arriba por el
+  // runtime de Framer y, con top:32px, tapa/recorta la parte superior del label
+  // (se veía "DISEÑO WEE" en vez de "DISEÑO WEB"). Empujamos el sticky-top de
+  // esas columnas por debajo del header. Medimos la altura real del header en
+  // runtime para que funcione igual en desktop y en mobile (alturas distintas).
+  var LABEL_GAP = 16; // separación extra bajo el header
+
+  function headerBottom() {
+    var best = null, bestTop = Infinity;
+    document.querySelectorAll('[data-framer-name="Navbar Menu"]').forEach(function (n) {
+      var bar = n.closest('[data-framer-name="Desktop"],[data-framer-name="Tablet"],[data-framer-name="Phone"]') || n;
+      var r = bar.getBoundingClientRect();
+      if (r.height > 0 && r.top < bestTop) { bestTop = r.top; best = bar; }
+    });
+    return best ? best.getBoundingClientRect().bottom : null;
+  }
+
+  function patchLabels() {
+    var hb = headerBottom();
+    if (hb == null) return false;
+    // Si el header ya está fuera de vista (scroll), no hay nada que despejar;
+    // no bajamos el label por debajo de su top original de 32px.
+    var top = Math.max(Math.round(hb + LABEL_GAP), 32) + 'px';
+
+    var changed = false;
+    document.querySelectorAll('div[data-framer-component-type="RichTextContainer"]').forEach(function (rt) {
+      if (!/rotate\(90deg\)/.test(rt.style.transform || '')) return;
+      // Subir hasta la columna sticky (la "Left" con position:sticky).
+      var col = rt.closest('div');
+      while (col && getComputedStyle(col).position !== 'sticky') col = col.parentElement;
+      if (!col) return;
+      if (col.style.getPropertyValue('top') !== top) {
+        col.style.setProperty('top', top, 'important');
+        changed = true;
+      }
+    });
     return changed;
   }
 
