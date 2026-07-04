@@ -1,0 +1,27 @@
+/* Tamaño/espaciado de los 4 titulares de /services, disponible desde el primer
+   render en CUALQUIER página. Framer navega client-side (SPA): al llegar a
+   /services desde el menú no se recarga services.html, así que su <head> y su
+   <script> nunca se ejecutan. Por eso este CSS y services-override.js se cargan
+   en TODAS las páginas (igual que footer-override.js) — el <head> y el JS del
+   punto de entrada persisten durante la navegación client-side.
+
+   El JS (services-override.js) sigue siendo necesario en paralelo: recalcula el
+   atributo viewBox del <svg> (no es CSS-able) y elimina el margin-bottom/gap que
+   Framer inyecta como estilo inline en runtime. */
+.framer-118l9ke h1.framer-text,
+.framer-lm6gx2 h2.framer-text,
+.framer-g5z5lm h2.framer-text,
+.framer-vsjawg h2.framer-text {
+  font-size: clamp(2rem, 6vw, 5rem) !important;
+  --framer-font-size: clamp(2rem, 6vw, 5rem) !important;
+  white-space: normal !important;
+}
+.framer-lm6gx2 h2.framer-text,
+.framer-g5z5lm h2.framer-text,
+.framer-vsjawg h2.framer-text {
+  margin-top: 30px !important;
+}
+.framer-lm6gx2 h2.framer-text,
+.framer-vsjawg h2.framer-text {
+  padding-top: 0.3em !important;
+}

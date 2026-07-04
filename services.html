@@ -355,30 +355,8 @@
     .framer-191hm2j-container {
       display: none !important;
     }
-
-    /* Tamaño/espaciado de los 4 titulares de servicios, disponible desde el
-       primer render (Framer pinta antes de que se ejecute services-override.js,
-       causando un flash con el tamaño original). El JS sigue siendo necesario
-       para el viewBox del svg y para quitar el margin-bottom/gap que Framer
-       inyecta en runtime — ver services-override.js. */
-    .framer-118l9ke h1.framer-text,
-    .framer-lm6gx2 h2.framer-text,
-    .framer-g5z5lm h2.framer-text,
-    .framer-vsjawg h2.framer-text {
-      font-size: clamp(2rem, 6vw, 5rem) !important;
-      --framer-font-size: clamp(2rem, 6vw, 5rem) !important;
-      white-space: normal !important;
-    }
-    .framer-lm6gx2 h2.framer-text,
-    .framer-g5z5lm h2.framer-text,
-    .framer-vsjawg h2.framer-text {
-      margin-top: 30px !important;
-    }
-    .framer-lm6gx2 h2.framer-text,
-    .framer-vsjawg h2.framer-text {
-      padding-top: 0.3em !important;
-    }
   </style>
+  <link rel="stylesheet" href="/services-override.css">
 </head>
 <body>
     <script async src="https://events.framer.com/script?v=2" data-fid="2e9d37bd162576e336cd89289dd73fc18fc4e1ed35d7ff2e0b01e127dda65830" data-no-nt></script>
