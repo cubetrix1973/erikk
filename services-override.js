@@ -1,4 +1,6 @@
 (function () {
+  console.log('[services-override] script loaded');
+
   var HEADINGS = {
     'Marketing Digital': { padTop: false, marginTop: false },
     'Diseño Web': { padTop: true, marginTop: true },
@@ -14,6 +16,8 @@
     document.querySelectorAll('h1.framer-text, h2.framer-text').forEach(function (h) {
       var cfg = HEADINGS[h.textContent.trim()];
       if (!cfg) return;
+
+      console.log('[services-override] found heading:', JSON.stringify(h.textContent.trim()), h);
 
       if (h.style.getPropertyValue('font-size') !== CLAMP) {
         h.style.setProperty('--framer-font-size', CLAMP, 'important');
