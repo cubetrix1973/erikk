@@ -1,9 +1,13 @@
 (function () {
+  // spaceTop = margen SUPERIOR aplicado al <svg> contenedor (fuera del
+  // overflow:hidden). NO se puede poner padding/margin en el <h1>/<h2>
+  // interno: el svg tiene altura fija (viewBox) y overflow:hidden, así que
+  // cualquier desplazamiento vertical del texto recorta el titular por abajo.
   var HEADINGS = {
-    'Marketing Digital': { padTop: false, marginTop: false },
-    'Diseño Web': { padTop: true, marginTop: true },
-    'Automatizaciones': { padTop: false, marginTop: true },
-    "Diseño de App's": { padTop: true, marginTop: true }
+    'Marketing Digital': { spaceTop: '56px' },
+    'Diseño Web': { spaceTop: null },
+    'Automatizaciones': { spaceTop: null },
+    "Diseño de App's": { spaceTop: null }
   };
 
   var CLAMP = 'clamp(2rem, 6vw, 5rem)';
@@ -18,14 +22,6 @@
       if (h.style.getPropertyValue('font-size') !== CLAMP) {
         h.style.setProperty('--framer-font-size', CLAMP, 'important');
         h.style.setProperty('font-size', CLAMP, 'important');
-        changed = true;
-      }
-      if (cfg.padTop && h.style.getPropertyValue('padding-top') !== '0.3em') {
-        h.style.setProperty('padding-top', '0.3em', 'important');
-        changed = true;
-      }
-      if (cfg.marginTop && h.style.getPropertyValue('margin-top') !== '30px') {
-        h.style.setProperty('margin-top', '30px', 'important');
         changed = true;
       }
 
@@ -72,6 +68,14 @@
       var section = h.closest('section');
       if (section && section.style.getPropertyValue('gap')) {
         section.style.removeProperty('gap');
+        changed = true;
+      }
+
+      // Espacio por encima del titular: como margin en el <svg> (fuera del
+      // overflow:hidden), sobrescribiendo el margin-top inline que Framer le
+      // pone con !important. No tocar el padding/margin del texto interno.
+      if (svg && cfg.spaceTop && svg.style.getPropertyValue('margin-top') !== cfg.spaceTop) {
+        svg.style.setProperty('margin-top', cfg.spaceTop, 'important');
         changed = true;
       }
     });

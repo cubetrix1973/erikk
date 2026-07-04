@@ -16,12 +16,6 @@
   --framer-font-size: clamp(2rem, 6vw, 5rem) !important;
   white-space: normal !important;
 }
-.framer-lm6gx2 h2.framer-text,
-.framer-g5z5lm h2.framer-text,
-.framer-vsjawg h2.framer-text {
-  margin-top: 30px !important;
-}
-.framer-lm6gx2 h2.framer-text,
-.framer-vsjawg h2.framer-text {
-  padding-top: 0.3em !important;
-}
+/* Sin padding/margin vertical en el texto interno: el <svg> tiene altura fija
+   (viewBox) y overflow:hidden, así que desplazar el texto lo recorta por abajo.
+   El espacio superior se aplica como margin en el <svg> desde services-override.js. */
