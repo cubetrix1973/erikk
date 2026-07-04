@@ -78,6 +78,16 @@
         svg.style.setProperty('margin-top', cfg.spaceTop, 'important');
         changed = true;
       }
+
+      // Un <svg> recorta su contenido por defecto (overflow:hidden del UA).
+      // Con line-height:90% la tilde de la Ñ (y los descendentes) sobresalen
+      // de la caja de línea y se cortan por arriba. overflow:visible pinta el
+      // glifo completo sin alterar el layout (el alto de caja lo sigue dando
+      // el viewBox, esto solo afecta al pintado).
+      if (svg && svg.style.getPropertyValue('overflow') !== 'visible') {
+        svg.style.setProperty('overflow', 'visible', 'important');
+        changed = true;
+      }
     });
 
     return changed;
