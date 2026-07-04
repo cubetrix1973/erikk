@@ -1776,33 +1776,9 @@
   }
   setInterval(purgeAuthorLinks, 300);
 
-  function fixMarketingHeadingSize() {
-    document.querySelectorAll('h1.framer-text, h2.framer-text').forEach(function(h) {
-      var t = h.textContent.trim();
-      if (t === 'Marketing Digital' && h.style.getPropertyValue('--framer-font-size') !== '75px') {
-        h.style.setProperty('--framer-font-size', '75px', 'important');
-        h.style.setProperty('font-size', '75px', 'important');
-      }
-      if (t === 'Diseño Web' && h.style.getPropertyValue('--framer-font-size') !== '75px') {
-        h.style.setProperty('--framer-font-size', '75px', 'important');
-        h.style.setProperty('font-size', '75px', 'important');
-        h.style.setProperty('margin-top', '30px', 'important');
-        h.style.setProperty('padding-top', '14px', 'important');
-      }
-      if (t === 'Automatizaciones' && h.style.getPropertyValue('--framer-font-size') !== '75px') {
-        h.style.setProperty('--framer-font-size', '75px', 'important');
-        h.style.setProperty('font-size', '75px', 'important');
-        h.style.setProperty('margin-top', '30px', 'important');
-      }
-      if (t === "Diseño de App's" && h.style.getPropertyValue('--framer-font-size') !== '75px') {
-        h.style.setProperty('--framer-font-size', '75px', 'important');
-        h.style.setProperty('font-size', '75px', 'important');
-        h.style.setProperty('margin-top', '30px', 'important');
-        h.style.setProperty('padding-top', '14px', 'important');
-      }
-    });
-  }
-  setInterval(fixMarketingHeadingSize, 300);
+  // Tamaño y espaciado de estos 4 titulares: ver services-override.js
+  // (antes fijaba 75px aquí mismo, lo que competía con el override responsive
+  // y desbordaba en pantallas estrechas).
 
   function fixVerticalLabelOverlap() {
     var containers = Array.from(document.querySelectorAll('.framer-Ij83b'));
@@ -1845,6 +1821,7 @@
 })();
 </script>
 <script src="/footer-override.js"></script>
+<script src="/services-override.js"></script>
 </body>
 
 <!-- Mirrored from erikk-template.framer.website/services by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Jun 2026 18:29:22 GMT -->
