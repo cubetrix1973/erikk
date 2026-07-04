@@ -1,6 +1,4 @@
 (function () {
-  console.log('[services-override] script loaded');
-
   var HEADINGS = {
     'Marketing Digital': { padTop: false, marginTop: false },
     'Diseño Web': { padTop: true, marginTop: true },
@@ -16,8 +14,6 @@
     document.querySelectorAll('h1.framer-text, h2.framer-text').forEach(function (h) {
       var cfg = HEADINGS[h.textContent.trim()];
       if (!cfg) return;
-
-      console.log('[services-override] found heading:', JSON.stringify(h.textContent.trim()), h);
 
       if (h.style.getPropertyValue('font-size') !== CLAMP) {
         h.style.setProperty('--framer-font-size', CLAMP, 'important');
@@ -59,6 +55,24 @@
             changed = true;
           }
         }
+      }
+
+      // Framer's own runtime bakes a static "avoid layout jump" correction
+      // into these elements' inline style: a negative margin-bottom on the
+      // svg and a zeroed gap on the section, precomputed at export time from
+      // the ORIGINAL (unclamped) text size. It never gets recalculated, so
+      // it now yanks the next block (image/card Grid) up into our taller
+      // heading, causing the visible overlap. Strip both — the underlying
+      // CSS already defines the correct responsive gap once Framer's inline
+      // override is gone.
+      if (svg && svg.style.getPropertyValue('margin-bottom')) {
+        svg.style.removeProperty('margin-bottom');
+        changed = true;
+      }
+      var section = h.closest('section');
+      if (section && section.style.getPropertyValue('gap')) {
+        section.style.removeProperty('gap');
+        changed = true;
       }
     });
 
