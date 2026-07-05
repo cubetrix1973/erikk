@@ -108,28 +108,47 @@
   // ---- Labels verticales laterales ("DISEÑO WEB", etc.) --------------------
   // Cada sección tiene un label rotado 90° dentro de una columna "Left" que es
   // position:sticky top:32px. El header del sitio queda fijado arriba por el
-  // runtime de Framer y, con top:32px, tapa/recorta la parte superior del label
-  // (se veía "DISEÑO WEE" en vez de "DISEÑO WEB"). Empujamos el sticky-top de
-  // esas columnas por debajo del header. Medimos la altura real del header en
-  // runtime para que funcione igual en desktop y en mobile (alturas distintas).
-  var LABEL_GAP = 16; // separación extra bajo el header
+  // runtime de Framer y tapa/recorta la parte superior del label.
+  //
+  // IMPORTANTE: el label está anclado por su CENTRO (top:50% + translate(-50%,
+  // -50%)), así que su mitad superior se extiende hacia arriba una distancia =
+  // media longitud del texto. "MARKETING DIGITAL" es el más largo, por eso con
+  // un top fijo su parte de arriba seguía metiéndose bajo el header (se veía
+  // "ETING DIG"). No sirve un top único: cada columna hay que empujarla según
+  // la altura real de SU label. Medimos, por label, el offset de su borde
+  // superior respecto al borde superior de la columna (O = labTop - colTop,
+  // constante e independiente del scroll) y fijamos sticky-top de forma que,
+  // cuando la columna esté pegada, el borde superior del label caiga por debajo
+  // del header: colTop = headerBottom + gap - O.
+  var LABEL_GAP = 20; // separación extra bajo el header
 
-  function headerBottom() {
+  // El header que TAPA los labels NO es el navbar en flujo (position:relative,
+  // se va con el scroll) sino un elemento aparte position:fixed que se oculta al
+  // bajar y REAPARECE al subir (patrón hide-on-scroll). Como puede reaparecer en
+  // cualquier momento, los labels deben despejar SIEMPRE su altura completa, no
+  // su posición instantánea. Detectamos ese header fijo por su geometría (fixed,
+  // ancho, altura de barra) y usamos su offsetHeight. Se cachea para no escanear
+  // el DOM en cada frame; se re-busca si desaparece del árbol.
+  var headerEl = null;
+  function findFixedHeader() {
     var best = null, bestTop = Infinity;
-    document.querySelectorAll('[data-framer-name="Navbar Menu"]').forEach(function (n) {
-      var bar = n.closest('[data-framer-name="Desktop"],[data-framer-name="Tablet"],[data-framer-name="Phone"]') || n;
-      var r = bar.getBoundingClientRect();
-      if (r.height > 0 && r.top < bestTop) { bestTop = r.top; best = bar; }
+    document.querySelectorAll('div[class*="-container"]').forEach(function (el) {
+      if (getComputedStyle(el).position !== 'fixed') return;
+      var r = el.getBoundingClientRect();
+      if (r.width > 300 && el.offsetHeight >= 40 && el.offsetHeight <= 200 && r.top < bestTop) {
+        bestTop = r.top; best = el;
+      }
     });
-    return best ? best.getBoundingClientRect().bottom : null;
+    return best;
+  }
+  function headerHeight() {
+    if (!headerEl || !headerEl.isConnected) headerEl = findFixedHeader();
+    return headerEl ? headerEl.offsetHeight : 0;
   }
 
   function patchLabels() {
-    var hb = headerBottom();
-    if (hb == null) return false;
-    // Si el header ya está fuera de vista (scroll), no hay nada que despejar;
-    // no bajamos el label por debajo de su top original de 32px.
-    var top = Math.max(Math.round(hb + LABEL_GAP), 32) + 'px';
+    var hh = headerHeight();
+    if (!hh) return false; // header fijo aún no montado
 
     var changed = false;
     document.querySelectorAll('div[data-framer-component-type="RichTextContainer"]').forEach(function (rt) {
@@ -138,6 +157,14 @@
       var col = rt.closest('div');
       while (col && getComputedStyle(col).position !== 'sticky') col = col.parentElement;
       if (!col) return;
+
+      // O = offset (constante, medido en vivo) del borde superior REAL del label
+      // —ya rotado— respecto al borde superior de su columna. El label se mueve
+      // con la columna, así que O no depende del scroll ni del top que fijemos.
+      var O = rt.getBoundingClientRect().top - col.getBoundingClientRect().top;
+      // Queremos que, con la columna pegada, labelTop = colTop + O >= hh + gap.
+      var top = Math.max(Math.round(hh + LABEL_GAP - O), 32) + 'px';
+
       if (col.style.getPropertyValue('top') !== top) {
         col.style.setProperty('top', top, 'important');
         changed = true;
