@@ -145,10 +145,26 @@
     if (!headerEl || !headerEl.isConnected) headerEl = findFixedHeader();
     return headerEl ? headerEl.offsetHeight : 0;
   }
+  // Borde INFERIOR real del header en viewport. Con hide-on-scroll el header se
+  // mueve (top negativo al ocultarse), así que su bottom es lo que de verdad
+  // determina si tapa algo. Distinto de headerHeight() (altura fija).
+  function headerBottom() {
+    if (!headerEl || !headerEl.isConnected) headerEl = findFixedHeader();
+    return headerEl ? headerEl.getBoundingClientRect().bottom : 0;
+  }
 
   function patchLabels() {
     var hh = headerHeight();
     if (!hh) return false; // header fijo aún no montado
+    var hb = headerBottom();
+
+    // ¿Estamos casi al final del scroll? El label de la ÚLTIMA sección se queda
+    // atascado bajo el header al agotarse el scroll (el sticky ya se soltó y no
+    // puedes bajar más). Solo ahí aplicamos el empuje hacia abajo; fuera de esa
+    // zona los labels de las demás secciones deben poder irse hacia arriba con
+    // normalidad (si no, se "pegarían" bajo el header al leer otra sección).
+    var slack = (document.body.scrollHeight - window.innerHeight) - window.scrollY;
+    var nearBottom = slack <= 260;
 
     var changed = false;
     document.querySelectorAll('div[data-framer-component-type="RichTextContainer"]').forEach(function (rt) {
@@ -158,15 +174,41 @@
       while (col && getComputedStyle(col).position !== 'sticky') col = col.parentElement;
       if (!col) return;
 
-      // O = offset (constante, medido en vivo) del borde superior REAL del label
-      // —ya rotado— respecto al borde superior de su columna. El label se mueve
-      // con la columna, así que O no depende del scroll ni del top que fijemos.
-      var O = rt.getBoundingClientRect().top - col.getBoundingClientRect().top;
-      // Queremos que, con la columna pegada, labelTop = colTop + O >= hh + gap.
-      var top = Math.max(Math.round(hh + LABEL_GAP - O), 32) + 'px';
+      // Top NATURAL del label (sin nuestro translateY). El label está centrado
+      // (top:50%) en su caja contenedora, que NO tocamos; medir desde ahí hace la
+      // referencia invariante al scroll y a nuestro propio empuje -> sin bucle de
+      // realimentación. labelH no cambia con el translateY.
+      var box = rt.parentElement;
+      var boxRect = box.getBoundingClientRect();
+      var labelH = rt.getBoundingClientRect().height;
+      var natTop = boxRect.top + boxRect.height / 2 - labelH / 2;
 
+      // (1) Fase PEGADA: fijar sticky-top para que, ya pegado, el label despeje el
+      // header. O = offset invariante del top natural respecto al top de la columna.
+      var O = natTop - col.getBoundingClientRect().top;
+      var top = Math.max(Math.round(hh + LABEL_GAP - O), 32) + 'px';
       if (col.style.getPropertyValue('top') !== top) {
         col.style.setProperty('top', top, 'important');
+        changed = true;
+      }
+
+      // (2) Fase SOLTADA al final de la última sección: el sticky ya no sujeta y
+      // el label sube bajo el header. Si su top natural queda tapado, lo empujamos
+      // hacia abajo con translateY para que la palabra se lea entera. Acotado a:
+      //  - nearBottom (solo al agotarse el scroll),
+      //  - covered (el header lo tapa por arriba), y
+      //  - candidate: el label está DE VERDAD junto al top (natTop >= -labelH); si
+      //    no, es un label de otra sección muy por encima y NO hay que arrastrarlo.
+      var covered = natTop < hb + LABEL_GAP;
+      var candidate = natTop >= -labelH;
+      var shift = (nearBottom && covered && candidate)
+        ? Math.max(0, Math.round(hb + LABEL_GAP - natTop))
+        : 0;
+      var tf = shift > 0
+        ? 'translate(-50%, calc(-50% + ' + shift + 'px)) rotate(90deg)'
+        : 'translate(-50%, -50%) rotate(90deg)';
+      if (rt.style.transform !== tf) {
+        rt.style.transform = tf;
         changed = true;
       }
     });
@@ -194,6 +236,16 @@
   // window resize — clamp() is viewport-width-dependent but resize doesn't
   // fire a DOM mutation, so the observer below won't catch it
   window.addEventListener('resize', patch);
+
+  // scroll — el empuje del label soltado (patchLabels fase 2) depende del scroll,
+  // que no dispara mutaciones. Coalescido a un rAF para no reconsultar el DOM en
+  // cada evento de scroll.
+  var scrollScheduled = false;
+  window.addEventListener('scroll', function () {
+    if (scrollScheduled) return;
+    scrollScheduled = true;
+    requestAnimationFrame(function () { scrollScheduled = false; patch(); });
+  }, { passive: true });
 
   // MutationObserver — react to DOM changes Framer makes after hydration
   var obs = new MutationObserver(function () {
