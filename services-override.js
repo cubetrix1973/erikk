@@ -19,15 +19,18 @@
       var cfg = HEADINGS[h.textContent.trim()];
       if (!cfg) return;
 
-      // ¿El titular está EN pantalla? El strip de margin/gap de más abajo solo hace
-      // falta cuando se ve el solape. Framer VIRTUALIZA las secciones off-screen y
-      // re-aplica su margin al re-renderizarlas; quitárselo ahí entra en un ping-pong
-      // a 60fps que oscila la altura de la página ~142px. No se nota mientras la
-      // sección está fuera de vista... salvo al llegar al final del scroll, donde ese
-      // vaivén de altura hace que el scroll (ya al máximo) rebote: el "temblor".
-      // Solución: off-screen no tocamos el margin (no se ve, y se corta la pelea).
+      // Solo tocamos el titular si está cerca del viewport (± un viewport). Estos
+      // fixes (font-size, recálculo de viewBox, strip de margin/gap) cambian la altura
+      // de la sección; Framer VIRTUALIZA las secciones LEJOS de vista y re-asserta sus
+      // estilos, así que patchearlas ahí entra en ping-pong que oscila la altura de la
+      // página. Al estar el scroll ya al máximo, ese vaivén lo hace rebotar: el
+      // "temblor" que se ve al recargar/scrollear. El titular lejano (p.ej. Marketing
+      // arriba cuando estás en el fondo) no se ve -> lo saltamos y se corta la pelea.
+      // El margen de ±1 viewport pre-arregla los que están a punto de entrar (sin
+      // flash) sin re-tocar los lejanos (donde estás lejos del scroll máximo igualmente).
+      var vh = window.innerHeight;
       var hr = h.getBoundingClientRect();
-      var onScreen = hr.bottom > 0 && hr.top < window.innerHeight;
+      if (hr.bottom <= -vh || hr.top >= 2 * vh) return;
 
       if (h.style.getPropertyValue('font-size') !== CLAMP) {
         h.style.setProperty('--framer-font-size', CLAMP, 'important');
@@ -71,12 +74,12 @@
       // heading, causing the visible overlap. Strip both — the underlying
       // CSS already defines the correct responsive gap once Framer's inline
       // override is gone.
-      if (onScreen && svg && svg.style.getPropertyValue('margin-bottom')) {
+      if (svg && svg.style.getPropertyValue('margin-bottom')) {
         svg.style.removeProperty('margin-bottom');
         changed = true;
       }
       var section = h.closest('section');
-      if (onScreen && section && section.style.getPropertyValue('gap')) {
+      if (section && section.style.getPropertyValue('gap')) {
         section.style.removeProperty('gap');
         changed = true;
       }
