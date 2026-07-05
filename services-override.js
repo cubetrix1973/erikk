@@ -19,6 +19,16 @@
       var cfg = HEADINGS[h.textContent.trim()];
       if (!cfg) return;
 
+      // ¿El titular está EN pantalla? El strip de margin/gap de más abajo solo hace
+      // falta cuando se ve el solape. Framer VIRTUALIZA las secciones off-screen y
+      // re-aplica su margin al re-renderizarlas; quitárselo ahí entra en un ping-pong
+      // a 60fps que oscila la altura de la página ~142px. No se nota mientras la
+      // sección está fuera de vista... salvo al llegar al final del scroll, donde ese
+      // vaivén de altura hace que el scroll (ya al máximo) rebote: el "temblor".
+      // Solución: off-screen no tocamos el margin (no se ve, y se corta la pelea).
+      var hr = h.getBoundingClientRect();
+      var onScreen = hr.bottom > 0 && hr.top < window.innerHeight;
+
       if (h.style.getPropertyValue('font-size') !== CLAMP) {
         h.style.setProperty('--framer-font-size', CLAMP, 'important');
         h.style.setProperty('font-size', CLAMP, 'important');
@@ -61,12 +71,12 @@
       // heading, causing the visible overlap. Strip both — the underlying
       // CSS already defines the correct responsive gap once Framer's inline
       // override is gone.
-      if (svg && svg.style.getPropertyValue('margin-bottom')) {
+      if (onScreen && svg && svg.style.getPropertyValue('margin-bottom')) {
         svg.style.removeProperty('margin-bottom');
         changed = true;
       }
       var section = h.closest('section');
-      if (section && section.style.getPropertyValue('gap')) {
+      if (onScreen && section && section.style.getPropertyValue('gap')) {
         section.style.removeProperty('gap');
         changed = true;
       }
@@ -145,18 +155,10 @@
     if (!headerEl || !headerEl.isConnected) headerEl = findFixedHeader();
     return headerEl ? headerEl.offsetHeight : 0;
   }
-  // Borde INFERIOR real del header en viewport. Con hide-on-scroll el header se
-  // mueve (top negativo al ocultarse), así que su bottom es lo que de verdad
-  // determina si tapa algo. Distinto de headerHeight() (altura fija).
-  function headerBottom() {
-    if (!headerEl || !headerEl.isConnected) headerEl = findFixedHeader();
-    return headerEl ? headerEl.getBoundingClientRect().bottom : 0;
-  }
 
   function patchLabels() {
     var hh = headerHeight();
     if (!hh) return false; // header fijo aún no montado
-    var hb = headerBottom();
 
     // ¿Estamos casi al final del scroll? El label de la ÚLTIMA sección se queda
     // atascado bajo el header al agotarse el scroll (el sticky ya se soltó y no
@@ -193,22 +195,30 @@
       }
 
       // (2) Fase SOLTADA al final de la última sección: el sticky ya no sujeta y
-      // el label sube bajo el header. Si su top natural queda tapado, lo empujamos
-      // hacia abajo con translateY para que la palabra se lea entera. Acotado a:
-      //  - nearBottom (solo al agotarse el scroll),
-      //  - covered (el header lo tapa por arriba), y
-      //  - candidate: el label está DE VERDAD junto al top (natTop >= -labelH); si
-      //    no, es un label de otra sección muy por encima y NO hay que arrastrarlo.
-      var covered = natTop < hb + LABEL_GAP;
-      var candidate = natTop >= -labelH;
-      var shift = (nearBottom && covered && candidate)
-        ? Math.max(0, Math.round(hb + LABEL_GAP - natTop))
+      // el label sube bajo el header. Empujamos hacia abajo con translateY para que
+      // la palabra se lea entera. CLAVE: el empuje va en el transform de la COLUMNA,
+      // NO del label. Framer re-asserta el transform del label en cada re-render ->
+      // ping-pong con nuestro write -> despierta el observer -> temblor. El transform
+      // de la columna (como su `top`) sí lo respeta.
+      //
+      // Anti-realimentación: natTop se mide dentro de la columna, así que YA incluye
+      // el empuje aplicado; lo descontamos (applied) para tener la posición natural
+      // real. Objetivo = altura COMPLETA del header (hh, no su borde instantáneo):
+      // así no salta cuando el header se oculta/reaparece (mismo criterio que fase 1).
+      // Acotado a nearBottom y a que el label esté DE VERDAD junto al top
+      // (natTopUnshifted >= -labelH); si no, es de otra sección muy por encima.
+      var applied = parseFloat(col.dataset.uShift || '0') || 0;
+      var natTopUnshifted = natTop - applied;
+      var target = hh + LABEL_GAP;
+      var want = (nearBottom && natTopUnshifted < target && natTopUnshifted >= -labelH)
+        ? Math.max(0, Math.round(target - natTopUnshifted))
         : 0;
-      var tf = shift > 0
-        ? 'translate(-50%, calc(-50% + ' + shift + 'px)) rotate(90deg)'
-        : 'translate(-50%, -50%) rotate(90deg)';
-      if (rt.style.transform !== tf) {
-        rt.style.transform = tf;
+      if (want !== applied) {
+        // ponytail: asume que Framer no pone transform propio en estas columnas
+        // sticky (verificado: none). Si algún día lo hiciera, componer en vez de fijar.
+        if (want > 0) col.style.setProperty('transform', 'translateY(' + want + 'px)', 'important');
+        else col.style.removeProperty('transform');
+        col.dataset.uShift = String(want);
         changed = true;
       }
     });
@@ -238,13 +248,16 @@
   window.addEventListener('resize', patch);
 
   // scroll — el empuje del label soltado (patchLabels fase 2) depende del scroll,
-  // que no dispara mutaciones. Coalescido a un rAF para no reconsultar el DOM en
-  // cada evento de scroll.
+  // que no dispara mutaciones. IMPORTANTE: en scroll solo corremos patchLabels,
+  // NO el patch() completo. Los fixes de titulares quitan/ponen margin/gap y
+  // recalculan el viewBox, lo que altera la altura de la página; hacerlo en cada
+  // frame de scroll provocaba un bucle (cambia altura -> salta scroll -> scroll
+  // event -> patch -> ...), visible como un temblor. patchLabels no toca layout.
   var scrollScheduled = false;
   window.addEventListener('scroll', function () {
     if (scrollScheduled) return;
     scrollScheduled = true;
-    requestAnimationFrame(function () { scrollScheduled = false; patch(); });
+    requestAnimationFrame(function () { scrollScheduled = false; patchLabels(); });
   }, { passive: true });
 
   // MutationObserver — react to DOM changes Framer makes after hydration
